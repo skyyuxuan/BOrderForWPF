@@ -1,0 +1,211 @@
+﻿<Window x:Class="BOrder.OrderDetailWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:converts="clr-namespace:BOrder.Converters"
+        xmlns:local="clr-namespace:BOrder"
+        mc:Ignorable="d"
+        Loaded="OnLoaded"
+        Title="订单详情" Height="500" Width="800">
+    
+    <Window.Resources>
+        <converts:DoubleConverter x:Key="DoubleConverter"/>
+        <converts:BoolConverter x:Key="BoolConverter"/>
+        <Style TargetType="TextBlock" x:Key="TitleTextBlockStyle">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Margin" Value="0,6"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="ContentTextBlockStyle">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="6,2"/>
+        </Style>
+
+        <Style TargetType="Border" x:Key="ContentBorderStyle">
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+            <Setter Property="Margin" Value="12,6,12,6"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+        </Style>
+
+    </Window.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Button Click="OnPrintClick" Content="打印" Margin="12" Width="100" HorizontalAlignment="Right"/>
+        <Grid x:Name="MainGrid" Width="600" HorizontalAlignment="Center"  Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="生产订单" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="18" Margin="6"/>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <WrapPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="产品编号" Style="{StaticResource TitleTextBlockStyle}"/>
+                        <Border Style="{StaticResource ContentBorderStyle}">
+                            <TextBlock Style="{StaticResource ContentTextBlockStyle}" Text="{Binding PaperBoxOrder.ID}"/>
+                        </Border>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="是否印字" Style="{StaticResource TitleTextBlockStyle}"/>
+                        <Border Style="{StaticResource ContentBorderStyle}">
+                            <TextBlock Style="{StaticResource ContentTextBlockStyle}" Text="{Binding PaperBoxOrder.IsPrintWord,Converter={StaticResource BoolConverter}}"/>
+                        </Border>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="箱子数量" Style="{StaticResource TitleTextBlockStyle}"/>
+                        <Border Style="{StaticResource ContentBorderStyle}">
+                            <TextBlock Style="{StaticResource ContentTextBlockStyle}" Text="{Binding Path=PaperBoxOrder.PaperBoxCount,FallbackValue=错误}"/>
+                        </Border>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="纸箱尺寸" Style="{StaticResource TitleTextBlockStyle}"/>
+                        <Border Style="{StaticResource ContentBorderStyle}">
+                            <TextBlock Style="{StaticResource ContentTextBlockStyle}">
+                            <Run Text="{Binding PaperBoxOrder.PaperBox.BoxSize.Length,Converter={StaticResource DoubleConverter},FallbackValue=错误}"/>
+                            <Run Text="X"/>
+                            <Run Text="{Binding PaperBoxOrder.PaperBox.BoxSize.Width,Converter={StaticResource DoubleConverter},FallbackValue=错误}"/>
+                            <Run Text="X"/>
+                            <Run Text="{Binding PaperBoxOrder.PaperBox.BoxSize.Height,Converter={StaticResource DoubleConverter},FallbackValue=错误}"/>
+                            </TextBlock>
+                        </Border>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="纸板尺寸" Style="{StaticResource TitleTextBlockStyle}"/>
+                        <Border Style="{StaticResource ContentBorderStyle}">
+                            <TextBlock Style="{StaticResource ContentTextBlockStyle}">
+                            <Run Text="{Binding PaperBoxOrder.PaperBox.PaperSize.Length,Converter={StaticResource DoubleConverter},FallbackValue=错误}"/>
+                            <Run Text="X"/>
+                            <Run Text="{Binding PaperBoxOrder.PaperBox.PaperSize.Width,Converter={StaticResource DoubleConverter},FallbackValue=错误}"/>
+                            </TextBlock>
+                        </Border>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="装箱数量" Style="{StaticResource TitleTextBlockStyle}"/>
+                        <Border Style="{StaticResource ContentBorderStyle}">
+                            <TextBlock Style="{StaticResource ContentTextBlockStyle}">
+                            <Run Text="{Binding PaperBoxOrder.PaperBoxCount,FallbackValue=错误}"/>
+                            <Run Text="/"/>
+                            <Run Text="箱" FontSize="10"/>
+                            </TextBlock>
+                        </Border>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="瓶子数量" Style="{StaticResource TitleTextBlockStyle}"/>
+                        <Border Style="{StaticResource ContentBorderStyle}">
+                            <TextBlock Style="{StaticResource ContentTextBlockStyle}" Text="{Binding PaperBoxOrder.PaperBox.ProductCount,FallbackValue=错误}"/>
+                        </Border>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="瓶子尺寸" Style="{StaticResource TitleTextBlockStyle}"/>
+                        <Border Style="{StaticResource ContentBorderStyle}">
+                            <TextBlock Style="{StaticResource ContentTextBlockStyle}">
+                            <Run Text="{Binding PaperBoxOrder.Product.ProductSize.Length,Converter={StaticResource DoubleConverter},FallbackValue=错误}"/>
+                            <Run Text="X"/>
+                            <Run Text="{Binding PaperBoxOrder.Product.ProductSize.Width,Converter={StaticResource DoubleConverter},FallbackValue=错误}"/>
+                            <Run Text="X"/>
+                            <Run Text="{Binding PaperBoxOrder.Product.ProductSize.Height,Converter={StaticResource DoubleConverter},FallbackValue=错误}"/>
+                            </TextBlock>
+                        </Border>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="每层装法" Style="{StaticResource TitleTextBlockStyle}"/>
+                        <Border Style="{StaticResource ContentBorderStyle}">
+                            <TextBlock Style="{StaticResource ContentTextBlockStyle}">
+                            <Run Text="{Binding PaperBoxOrder.Product.FloorSizeCount.LengthCount,Converter={StaticResource DoubleConverter},FallbackValue=错误}"/>
+                            <Run Text="X"/>
+                            <Run Text="{Binding PaperBoxOrder.Product.FloorSizeCount.WidthCount,Converter={StaticResource DoubleConverter},FallbackValue=错误}"/>
+                            </TextBlock>
+                        </Border>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="层数" Style="{StaticResource TitleTextBlockStyle}"/>
+                        <Border Style="{StaticResource ContentBorderStyle}">
+                            <TextBlock Style="{StaticResource ContentTextBlockStyle}" Text="{Binding PaperBoxOrder.Product.FloorCount,FallbackValue=错误}"/>
+                        </Border>
+                    </StackPanel>
+
+                </WrapPanel>
+                <WrapPanel Grid.Row="1">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="卡子数量" Style="{StaticResource TitleTextBlockStyle}"/>
+                        <Border Style="{StaticResource ContentBorderStyle}">
+                            <TextBlock Style="{StaticResource ContentTextBlockStyle}" Text="{Binding PaperBoxOrder.PaperBox.ClipCount,FallbackValue=错误}"/>
+                        </Border>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="垫片尺寸" Style="{StaticResource TitleTextBlockStyle}"/>
+                        <Border Style="{StaticResource ContentBorderStyle}">
+                            <TextBlock Style="{StaticResource ContentTextBlockStyle}">
+                            <Run Text="{Binding PaperBoxOrder.PaperBox.GasketSize.Length,Converter={StaticResource DoubleConverter},FallbackValue=错误}"/>
+                            <Run Text="X"/>
+                            <Run Text="{Binding PaperBoxOrder.PaperBox.GasketSize.Width,Converter={StaticResource DoubleConverter},FallbackValue=错误}"/>
+                            </TextBlock>
+                        </Border>
+                        <TextBlock Text="共" Style="{StaticResource TitleTextBlockStyle}"/>
+                        <Border Style="{StaticResource ContentBorderStyle}">
+                            <TextBlock Style="{StaticResource ContentTextBlockStyle}" Text="{Binding PaperBoxOrder.PaperBox.GasketCount,FallbackValue=错误}"/>
+                        </Border>
+                        <TextBlock Text="片" Style="{StaticResource TitleTextBlockStyle}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="长卡子尺寸" Style="{StaticResource TitleTextBlockStyle}"/>
+                        <Border Style="{StaticResource ContentBorderStyle}">
+                            <TextBlock Style="{StaticResource ContentTextBlockStyle}">
+                            <Run Text="{Binding PaperBoxOrder.PaperBox.LengthClipSize.Length,Converter={StaticResource DoubleConverter},FallbackValue=错误}"/>
+                            <Run Text="X"/>
+                            <Run Text="{Binding PaperBoxOrder.PaperBox.LengthClipSize.Width,Converter={StaticResource DoubleConverter},FallbackValue=错误}"/>
+                            </TextBlock>
+                        </Border>
+                        <TextBlock Text="共" Style="{StaticResource TitleTextBlockStyle}"/>
+                        <Border Style="{StaticResource ContentBorderStyle}">
+                            <TextBlock Style="{StaticResource ContentTextBlockStyle}" Text="{Binding PaperBoxOrder.PaperBox.LengthClipCount,FallbackValue=错误}"/>
+                        </Border>
+                        <TextBlock Text="片" Style="{StaticResource TitleTextBlockStyle}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="短卡子尺寸" Style="{StaticResource TitleTextBlockStyle}"/>
+                        <Border Style="{StaticResource ContentBorderStyle}">
+                            <TextBlock Style="{StaticResource ContentTextBlockStyle}">
+                            <Run Text="{Binding PaperBoxOrder.PaperBox.ShortClipSize.Length,Converter={StaticResource DoubleConverter},FallbackValue=错误}"/>
+                            <Run Text="X"/>
+                            <Run Text="{Binding PaperBoxOrder.PaperBox.ShortClipSize.Length,Converter={StaticResource DoubleConverter},FallbackValue=错误}"/>
+                            </TextBlock>
+                        </Border>
+                        <TextBlock Text="共" Style="{StaticResource TitleTextBlockStyle}"/>
+                        <Border Style="{StaticResource ContentBorderStyle}">
+                            <TextBlock Style="{StaticResource ContentTextBlockStyle}" Text="{Binding PaperBoxOrder.PaperBox.ShortClipCount,FallbackValue=错误}"/>
+                        </Border>
+                        <TextBlock Text="片" Style="{StaticResource TitleTextBlockStyle}"/>
+                    </StackPanel>
+                </WrapPanel>
+                <StackPanel Orientation="Horizontal" Grid.Row="2">
+                    <TextBlock Text="备注" Style="{StaticResource TitleTextBlockStyle}"/>
+                    <Border Style="{StaticResource ContentBorderStyle}">
+                        <TextBlock Style="{StaticResource ContentTextBlockStyle}" Text="{Binding PaperBoxOrder.Remarks,FallbackValue=错误}"/>
+                    </Border>
+                </StackPanel>
+            </Grid>
+        </Grid>
+
+    </Grid>
+</Window>

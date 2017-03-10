@@ -1,0 +1,82 @@
+﻿<Window x:Class="BOrder.CreateOrderWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BOrder"
+        mc:Ignorable="d"
+        Title="创建订单" Height="300" Width="500">
+
+    <Window.Resources>
+        <Style x:Key="InputStyle" TargetType="TextBox">
+            <Setter Property="MinWidth" Value="60"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="6,0"/>
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+        </Style>
+    </Window.Resources>
+    <Grid Margin="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <WrapPanel Grid.Row="1" Margin="0,6">
+            <TextBlock Text="产品编号"/>
+            <TextBox Style="{StaticResource InputStyle}"
+                         x:Name="Order_ID_TB" Width="100"/>
+            <CheckBox Content="是否印字" x:Name="IS_Print_CB"/>
+        </WrapPanel>
+        <WrapPanel Grid.Row="2" Margin="0,6" >
+            <TextBlock Grid.ColumnSpan="3" Text="产品尺寸" />
+
+            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                <TextBox Style="{StaticResource InputStyle}" PreviewTextInput="TextBox_PreviewTextInput"
+                         x:Name="Product_Length_TB"/>
+                <TextBlock Text="X"/>
+                <TextBox Style="{StaticResource InputStyle}" PreviewTextInput="TextBox_PreviewTextInput"
+                         x:Name="Product_Width_TB"/>
+                <TextBlock Text="X"/>
+                <TextBox Style="{StaticResource InputStyle}" PreviewTextInput="TextBox_PreviewTextInput"
+                          x:Name="Product_Height_TB"/>
+            </StackPanel>
+
+           
+            <StackPanel Grid.Row="2" Grid.Column="2" Orientation="Horizontal">
+                <TextBlock Grid.Row="2" Grid.Column="1" Text="产品总数"/>
+                <TextBox Style="{StaticResource InputStyle}"  PreviewTextInput="TextBox_PreviewTextInput"
+                         x:Name="Product_Total_TB"/>
+            </StackPanel>
+
+            <TextBlock Grid.Row="3" Foreground="Red"  x:Name="Box_Output_TB" Grid.ColumnSpan="3"
+                       TextWrapping="Wrap" MaxWidth="300"/>
+        </WrapPanel>
+        <WrapPanel Grid.Row="3" Margin="0,6">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="每层装法"/>
+                <TextBox Style="{StaticResource InputStyle}"  PreviewTextInput="TextBox_PreviewTextInput"
+                          x:Name="Floor_Length_Count_TB"/>
+                <TextBlock Text="X"/>
+                <TextBox Style="{StaticResource InputStyle}"  PreviewTextInput="TextBox_PreviewTextInput"
+                          x:Name="Floor_Width_Count_TB"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBox Style="{StaticResource InputStyle}" PreviewTextInput="TextBox_PreviewTextInput"
+                         x:Name="Floor_TB"/>
+                <TextBlock Grid.Row="2" Grid.Column="1" Text="层"/>
+            </StackPanel>
+        </WrapPanel>
+        <Grid Grid.Row="4" Margin="0,6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="备注"/>
+            <TextBox HorizontalAlignment="Stretch" Style="{StaticResource InputStyle}"
+                     x:Name="Product_Remarks_TB" Grid.Column="1" TextAlignment="Left"/>
+        </Grid>
+        <Button VerticalAlignment="Bottom" HorizontalAlignment="Right" Content="生成订单" Click="Button_Click"/>
+    </Grid>
+</Window>
