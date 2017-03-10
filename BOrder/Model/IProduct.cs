@@ -11,6 +11,7 @@ namespace BOrder.Model
         FloorSizeCount FloorSizeCount { get; set; }
         int FloorCount { get; set; }
         PaperBox CreatePaperBox(IPaperBoxConfig config, int boxCount);
+        PaperBox UpdatePaperBox(PaperBox paperBox, IPaperBoxConfig config, int boxCount);
         int GetPaperBoxCount(int total);
     }
 }

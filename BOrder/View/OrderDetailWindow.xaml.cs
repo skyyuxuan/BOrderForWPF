@@ -39,7 +39,7 @@ namespace BOrder
             dialog.UserPageRangeEnabled = true;
             var printTicket = dialog.PrintTicket;
             printTicket.PageMediaSize = new PageMediaSize(PageMediaSizeName.ISOA4);//A4纸
-            printTicket.PageOrientation = PageOrientation.Landscape;//默认竖向打印
+            printTicket.PageOrientation = PageOrientation.Portrait;//默认竖向打印
             if (dialog.ShowDialog() == true)
             {
                 dialog.PrintVisual(MainGrid, "Print Test");

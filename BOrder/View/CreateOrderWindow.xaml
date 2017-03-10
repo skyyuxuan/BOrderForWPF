@@ -27,7 +27,8 @@
             <TextBlock Text="产品编号"/>
             <TextBox Style="{StaticResource InputStyle}"
                          x:Name="Order_ID_TB" Width="100"/>
-            <CheckBox Content="是否印字" x:Name="IS_Print_CB"/>
+            <CheckBox Content="是否印字" x:Name="IS_Print_CB" IsChecked="False"/>
+            <CheckBox Content="是否为黑卡子" Margin="12,0,0,0" x:Name="IS_Black_Clip_CB" IsChecked="False"/> 
         </WrapPanel>
         <WrapPanel Grid.Row="2" Margin="0,6" >
             <TextBlock Grid.ColumnSpan="3" Text="产品尺寸" />
@@ -66,6 +67,11 @@
                 <TextBox Style="{StaticResource InputStyle}" PreviewTextInput="TextBox_PreviewTextInput"
                          x:Name="Floor_TB"/>
                 <TextBlock Grid.Row="2" Grid.Column="1" Text="层"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="箱子附加高度" Margin="12,0,0,0"/>
+                <TextBox Style="{StaticResource InputStyle}"
+                     x:Name="Extra_Height_TB" Width="20"/>
             </StackPanel>
         </WrapPanel>
         <Grid Grid.Row="4" Margin="0,6">

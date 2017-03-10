@@ -12,7 +12,7 @@ namespace BOrder.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             double reValue = System.Convert.ToDouble(value);
-            return reValue.ToString("0.00");
+            return reValue.ToString("0.0");
 
         }
 

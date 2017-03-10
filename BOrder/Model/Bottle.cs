@@ -46,49 +46,103 @@ namespace BOrder.Model
             result.BoxSize.Height = (ProductSize.Height + config.Spacing) * FloorCount + config.InsideHeight + config.ExtraHeight * (FloorCount - 1);
             double length = (ProductSize.Length + config.Spacing) * FloorSizeCount.LengthCount + config.Inside;
             double width = (ProductSize.Width + config.Spacing) * FloorSizeCount.WidthCount + config.Inside;
-            //卡子数量
-            result.ClipCount = boxCount * FloorCount;
+
             result.BoxSize.Length = Math.Max(length, width);
             result.BoxSize.Width = Math.Min(length, width);
-            //垫片数量
-            result.GasketCount = (FloorCount + 1) * boxCount;
-            //垫片尺寸
-            var gasketSize = new ObjectSize();
-            gasketSize.Width = result.BoxSize.Width - 1;
-            gasketSize.Length = result.BoxSize.Length - 1;
-            result.GasketSize = gasketSize;
 
-            //长卡子尺寸
-            var lengthClipSize = new ObjectSize();
-            lengthClipSize.Width = ProductSize.Height;
-            lengthClipSize.Length = result.GasketSize.Length;
-            result.LengthClipSize = lengthClipSize;
+            return UpdatePaperBox(result, config, boxCount);
+            ////卡子数量
+            //result.ClipCount = boxCount * FloorCount;
+            ////垫片数量
+            //result.GasketCount = (FloorCount + 1) * boxCount;
+            ////垫片尺寸
+            //var gasketSize = new ObjectSize();
+            //gasketSize.Width = result.BoxSize.Width - 1;
+            //gasketSize.Length = result.BoxSize.Length - 1;
+            //result.GasketSize = gasketSize;
 
-            //长卡子尺寸
-            var shortClipSize = new ObjectSize();
-            shortClipSize.Width = ProductSize.Height;
-            shortClipSize.Length = result.GasketSize.Width;
-            result.ShortClipSize = shortClipSize;
-            if (length >= width)
-            {
-                result.LengthClipCount = result.ClipCount * (FloorSizeCount.WidthCount - 1);
-                result.ShortClipCount = result.ClipCount * (FloorSizeCount.LengthCount - 1);
-            }
-            else
-            {
-                result.LengthClipCount = result.ClipCount * (FloorSizeCount.LengthCount - 1);
-                result.ShortClipCount = result.ClipCount * (FloorSizeCount.WidthCount - 1);
-            }
-            var size = new ObjectSize();
-            size.Width = result.BoxSize.Width + result.BoxSize.Height + 0.5;
-            size.Length = (result.BoxSize.Length + result.BoxSize.Width) * 2 + 3;
-            result.PaperSize = size;
-            return result;
+            ////长卡子尺寸
+            //var lengthClipSize = new ObjectSize();
+            //lengthClipSize.Width = ProductSize.Height;
+            //lengthClipSize.Length = result.GasketSize.Length;
+            //result.LengthClipSize = lengthClipSize;
+
+            ////长卡子尺寸
+            //var shortClipSize = new ObjectSize();
+            //shortClipSize.Width = ProductSize.Height;
+            //shortClipSize.Length = result.GasketSize.Width;
+            //result.ShortClipSize = shortClipSize;
+            //if (length >= width)
+            //{
+            //    result.LengthClipCount = result.ClipCount * (FloorSizeCount.WidthCount - 1);
+            //    result.ShortClipCount = result.ClipCount * (FloorSizeCount.LengthCount - 1);
+            //}
+            //else
+            //{
+            //    result.LengthClipCount = result.ClipCount * (FloorSizeCount.LengthCount - 1);
+            //    result.ShortClipCount = result.ClipCount * (FloorSizeCount.WidthCount - 1);
+            //}
+            //var size = new ObjectSize();
+            //size.Width = result.BoxSize.Width + result.BoxSize.Height + 0.5;
+            //size.Length = (result.BoxSize.Length + result.BoxSize.Width) * 2 + 3;
+            //result.PaperSize = size;
+            //return result;
         }
 
         public int GetPaperBoxCount(int total)
         {
             return (int)Math.Ceiling(((decimal)total / (this.FloorSizeCount.WidthCount * this.FloorSizeCount.LengthCount * FloorCount)));
+        }
+
+        public PaperBox UpdatePaperBox(PaperBox paperBox, IPaperBoxConfig config, int boxCount)
+        {
+            if (paperBox == null || paperBox.BoxSize == null)
+                return paperBox;
+
+            double length = paperBox.BoxSize.Length;
+            double width = paperBox.BoxSize.Width;
+
+
+            paperBox.BoxSize.Length = Math.Max(length, width);
+            paperBox.BoxSize.Width = Math.Min(length, width);
+
+            //卡子数量
+            paperBox.ClipCount = boxCount * FloorCount;
+            //垫片数量
+            paperBox.GasketCount = FloorCount * boxCount;
+            //垫片尺寸
+            var gasketSize = new ObjectSize();
+            gasketSize.Width = paperBox.BoxSize.Width - 1;
+            gasketSize.Length = paperBox.BoxSize.Length - 1;
+            paperBox.GasketSize = gasketSize;
+
+            //长卡子尺寸
+            var lengthClipSize = new ObjectSize();
+            lengthClipSize.Width = ProductSize.Height;
+            lengthClipSize.Length = paperBox.GasketSize.Length;
+            paperBox.LengthClipSize = lengthClipSize;
+
+            //长卡子尺寸
+            var shortClipSize = new ObjectSize();
+            shortClipSize.Width = ProductSize.Height;
+            shortClipSize.Length = paperBox.GasketSize.Width;
+            paperBox.ShortClipSize = shortClipSize;
+            if (length >= width)
+            {
+                paperBox.LengthClipCount = paperBox.ClipCount * (FloorSizeCount.WidthCount - 1);
+                paperBox.ShortClipCount = paperBox.ClipCount * (FloorSizeCount.LengthCount - 1);
+            }
+            else
+            {
+                paperBox.LengthClipCount = paperBox.ClipCount * (FloorSizeCount.LengthCount - 1);
+                paperBox.ShortClipCount = paperBox.ClipCount * (FloorSizeCount.WidthCount - 1);
+            }
+            var size = new ObjectSize();
+            size.Width = paperBox.BoxSize.Width + paperBox.BoxSize.Height + 0.5;
+            size.Length = (paperBox.BoxSize.Length + paperBox.BoxSize.Width) * 2 + 3;
+            paperBox.PaperSize = size;
+
+            return paperBox;
         }
     }
 }

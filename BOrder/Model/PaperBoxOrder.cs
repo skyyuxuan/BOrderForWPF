@@ -56,5 +56,12 @@ namespace BOrder.Model
             set { SetProperty(ref _paperBoxCount, value, nameof(PaperBoxCount)); }
         }
 
+        private int _productTotalCount;
+        public int ProductTotalCount
+        {
+            get { return _productTotalCount; }
+            set { SetProperty(ref _productTotalCount, value, nameof(ProductTotalCount)); }
+        }
+
     }
 }

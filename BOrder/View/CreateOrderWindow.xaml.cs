@@ -42,6 +42,7 @@ namespace BOrder
                 int widthCount = 0;
                 int floorCount = 0;
                 int total = 0;
+                float extraHeight = 0f;
 
                 double.TryParse(Product_Length_TB.Text, out length);
                 double.TryParse(Product_Height_TB.Text, out height);
@@ -50,6 +51,7 @@ namespace BOrder
                 int.TryParse(Floor_Width_Count_TB.Text, out widthCount);
                 int.TryParse(Floor_Length_Count_TB.Text, out lengthCount);
                 int.TryParse(Product_Total_TB.Text, out total);
+                float.TryParse(Extra_Height_TB.Text, out extraHeight);
 
                 var bottle = new Bottle()
                 {
@@ -63,8 +65,18 @@ namespace BOrder
                     OrderID = Order_ID_TB.Text,
                     Remarks = Product_Remarks_TB.Text
                 };
-
-                var order = OrderManager.Instance().CreatePaperBoxOfWhiteClipOrder(bottle, extra, total);
+                IPaperBoxConfig config = null;
+                if (!(bool)IS_Black_Clip_CB.IsChecked)
+                {
+                    config = new PaperBoxOfWhiteClipConfig();
+                    config.ExtraHeight = extraHeight;
+                }
+                else
+                {
+                    config = new PaperBoxOfBlackClipConfig();
+                    config.ExtraHeight = extraHeight;
+                }
+                var order = OrderManager.Instance().CreatePaperBoxOrder(config, bottle, extra, total);
                 var window = new OrderDetailWindow();
                 window.PaperBoxOrder = order;
                 window.Show();
@@ -82,8 +94,6 @@ namespace BOrder
                 return false;
             }
             return true;
-
-
         }
     }
 }

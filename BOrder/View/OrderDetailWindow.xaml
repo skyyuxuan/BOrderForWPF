@@ -13,12 +13,12 @@
         <converts:DoubleConverter x:Key="DoubleConverter"/>
         <converts:BoolConverter x:Key="BoolConverter"/>
         <Style TargetType="TextBlock" x:Key="TitleTextBlockStyle">
-            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontSize" Value="18"/>
             <Setter Property="Margin" Value="0,6"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
         <Style TargetType="TextBlock" x:Key="ContentTextBlockStyle">
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontSize" Value="16"/>
             <Setter Property="Margin" Value="6,2"/>
         </Style>
 
@@ -36,13 +36,13 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Button Click="OnPrintClick" Content="打印" Margin="12" Width="100" HorizontalAlignment="Right"/>
-        <Grid x:Name="MainGrid" Width="600" HorizontalAlignment="Center"  Grid.Row="1">
+        <Grid x:Name="MainGrid" Width="680" HorizontalAlignment="Center"  Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            <TextBlock Text="生产订单" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="18" Margin="6"/>
+            <TextBlock Text="生产订单" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="20" Margin="12"/>
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
@@ -99,7 +99,7 @@
                         <TextBlock Text="装箱数量" Style="{StaticResource TitleTextBlockStyle}"/>
                         <Border Style="{StaticResource ContentBorderStyle}">
                             <TextBlock Style="{StaticResource ContentTextBlockStyle}">
-                            <Run Text="{Binding PaperBoxOrder.PaperBoxCount,FallbackValue=错误}"/>
+                            <Run Text="{Binding PaperBoxOrder.PaperBox.ProductCount,FallbackValue=错误}"/>
                             <Run Text="/"/>
                             <Run Text="箱" FontSize="10"/>
                             </TextBlock>
@@ -108,7 +108,7 @@
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="瓶子数量" Style="{StaticResource TitleTextBlockStyle}"/>
                         <Border Style="{StaticResource ContentBorderStyle}">
-                            <TextBlock Style="{StaticResource ContentTextBlockStyle}" Text="{Binding PaperBoxOrder.PaperBox.ProductCount,FallbackValue=错误}"/>
+                            <TextBlock Style="{StaticResource ContentTextBlockStyle}" Text="{Binding PaperBoxOrder.ProductTotalCount,FallbackValue=错误}"/>
                         </Border>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
@@ -188,7 +188,7 @@
                             <TextBlock Style="{StaticResource ContentTextBlockStyle}">
                             <Run Text="{Binding PaperBoxOrder.PaperBox.ShortClipSize.Length,Converter={StaticResource DoubleConverter},FallbackValue=错误}"/>
                             <Run Text="X"/>
-                            <Run Text="{Binding PaperBoxOrder.PaperBox.ShortClipSize.Length,Converter={StaticResource DoubleConverter},FallbackValue=错误}"/>
+                            <Run Text="{Binding PaperBoxOrder.PaperBox.ShortClipSize.Width,Converter={StaticResource DoubleConverter},FallbackValue=错误}"/>
                             </TextBlock>
                         </Border>
                         <TextBlock Text="共" Style="{StaticResource TitleTextBlockStyle}"/>

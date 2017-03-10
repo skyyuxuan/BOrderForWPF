@@ -53,6 +53,7 @@ namespace BOrder
         public PaperBoxOrder CreatePaperBoxOrder(IPaperBoxConfig config, IProduct product, ProductExtra extra, int total)
         {
             var order = new PaperBoxOrder();
+            order.ProductTotalCount = total;
             order.Product = product;
             order.PaperBoxCount = product.GetPaperBoxCount(total);
             order.PaperBox = product.CreatePaperBox(config, order.PaperBoxCount);
