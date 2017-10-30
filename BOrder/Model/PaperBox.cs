@@ -122,6 +122,70 @@ namespace BOrder.Model
             }
         }
 
+        private double _paperPrice;
+        /// <summary>
+        /// 箱子单价
+        /// </summary>
+        public double PaperPrice
+        {
+            get { return _paperPrice; }
+            set
+            {
+                SetProperty(ref _paperPrice, value, nameof(PaperPrice));
+            }
+        }
+
+        private double _shortClipPrice;
+        /// <summary>
+        /// 短卡子价格
+        /// </summary>
+        public double ShortClipPrice
+        {
+            get { return _shortClipPrice; }
+            set
+            {
+                SetProperty(ref _shortClipPrice, value, nameof(ShortClipPrice));
+            }
+        }
+
+        private double _lengthClipPrice;
+        /// <summary>
+        /// 长卡子价格
+        /// </summary>
+        public double LengthClipPrice
+        {
+            get { return _lengthClipPrice; }
+            set
+            {
+                SetProperty(ref _lengthClipPrice, value, nameof(LengthClipPrice));
+            }
+        }
+
+        private double _paperBoxPrice;
+        /// <summary>
+        /// 每套箱子价格
+        /// </summary>
+        public double PaperBoxPrice  
+        {
+            get { return _paperBoxPrice; }
+            set
+            {
+                SetProperty(ref _paperBoxPrice, value, nameof(PaperBoxPrice));
+            }
+        }
+
+        private double _gasketPrice;
+        /// <summary>
+        /// 垫片价格
+        /// </summary>
+        public double GasketPrice
+        {
+            get { return _gasketPrice; }
+            set
+            {
+                SetProperty(ref _gasketPrice, value, nameof(GasketPrice));
+            }
+        }
 
     }
 }

@@ -33,16 +33,23 @@ namespace BOrder
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (ValidationEmpty(Order_ID_TB, "请填写订单号") && ValidationEmpty(Product_Length_TB, "请正确填写产品尺寸") && ValidationEmpty(Product_Height_TB, "请正确填写产品尺寸") && ValidationEmpty(Product_Width_TB, "请正确填写产品尺寸") && ValidationEmpty(Floor_Width_Count_TB, "请正确填写每层装法") && ValidationEmpty(Floor_Length_Count_TB, "请正确填写每层装法") && ValidationEmpty(Floor_TB, "请正确填写层数") && ValidationEmpty(Product_Total_TB, "请正确填写产品总数"))
+            if (ValidationEmpty(Order_ID_TB, "请填写订单号") && ValidationEmpty(Product_Length_TB, "请正确填写产品尺寸") && ValidationEmpty(Product_Height_TB, "请正确填写产品尺寸") && ValidationEmpty(Product_Width_TB, "请正确填写产品尺寸") && ValidationEmpty(Floor_Width_Count_TB, "请正确填写每层装法") && ValidationEmpty(Floor_Length_Count_TB, "请正确填写每层装法") && ValidationEmpty(Floor_TB, "请正确填写层数") && ValidationEmpty(Product_Total_TB, "请正确填写产品总数")
+                && ValidationEmpty(Paper_Price_TB, "请正确填写纸板价格") && ValidationEmpty(Gasket_Price_TB, "请正确填写垫片价格") && ValidationEmpty(Clip_Price_TB, "请正确填写卡子价格"))
             {
                 double height = 0;
                 double length = 0;
                 double width = 0;
+
                 int lengthCount = 0;
                 int widthCount = 0;
                 int floorCount = 0;
                 int total = 0;
                 float extraHeight = 0f;
+
+                double paperPrice = 0;
+                double clipPrice = 0;
+                double gasketPrice = 0;
+
 
                 double.TryParse(Product_Length_TB.Text, out length);
                 double.TryParse(Product_Height_TB.Text, out height);
@@ -53,8 +60,21 @@ namespace BOrder
                 int.TryParse(Product_Total_TB.Text, out total);
                 float.TryParse(Extra_Height_TB.Text, out extraHeight);
 
+
+                double.TryParse(Paper_Price_TB.Text, out paperPrice);
+                double.TryParse(Clip_Price_TB.Text, out clipPrice);
+                double.TryParse(Gasket_Price_TB.Text, out gasketPrice);
+
+                if (floorCount == 0)
+                {
+                    MessageBox.Show("请正确填写层数");
+                    return;
+                }
                 var bottle = new Bottle()
                 {
+                    PaperPrice = paperPrice,
+                    GasketPrice = gasketPrice,
+                    ClipPrice = clipPrice,
                     FloorCount = floorCount,
                     ProductSize = new ObjectSize() { Height = height, Length = length, Width = width },
                     FloorSizeCount = new FloorSizeCount() { LengthCount = lengthCount, WidthCount = widthCount }

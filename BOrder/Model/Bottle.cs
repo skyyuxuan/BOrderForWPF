@@ -37,6 +37,37 @@ namespace BOrder.Model
             }
         }
 
+        private double _paperPrice;
+        public double PaperPrice
+        {
+            get { return _paperPrice; }
+            set
+            {
+                SetProperty(ref _paperPrice, value, nameof(PaperPrice));
+            }
+        }
+
+        private double _gasketPrice;
+        public double GasketPrice
+        {
+            get { return _gasketPrice; }
+            set
+            {
+                SetProperty(ref _gasketPrice, value, nameof(GasketPrice));
+            }
+        }
+
+        private double _clipPrice;
+        public double ClipPrice
+        {
+            get { return _clipPrice; }
+            set
+            {
+                SetProperty(ref _clipPrice, value, nameof(ClipPrice));
+            }
+        }
+
+
         public PaperBox CreatePaperBox(IPaperBoxConfig config, int boxCount)
         {
             var result = new PaperBox();
@@ -47,8 +78,8 @@ namespace BOrder.Model
             double length = (ProductSize.Length + config.Spacing) * FloorSizeCount.LengthCount + config.Inside;
             double width = (ProductSize.Width + config.Spacing) * FloorSizeCount.WidthCount + config.Inside;
 
-            result.BoxSize.Length = Math.Max(length, width);
-            result.BoxSize.Width = Math.Min(length, width);
+            result.BoxSize.Length = length;
+            result.BoxSize.Width = width;
 
             return UpdatePaperBox(result, config, boxCount);
             ////卡子数量
@@ -141,6 +172,19 @@ namespace BOrder.Model
             size.Width = paperBox.BoxSize.Width + paperBox.BoxSize.Height + 0.5;
             size.Length = (paperBox.BoxSize.Length + paperBox.BoxSize.Width) * 2 + 3;
             paperBox.PaperSize = size;
+
+            //计算价格
+
+            //每箱垫片价格
+            paperBox.GasketPrice = FloorCount * paperBox.GasketSize.Width * paperBox.GasketSize.Length * GasketPrice / 10000;
+            //短卡子价格
+            paperBox.ShortClipPrice = paperBox.ShortClipSize.Width * paperBox.ShortClipSize.Length * (paperBox.ShortClipCount / boxCount) * ClipPrice / 10000;
+            //长卡子价格
+            paperBox.LengthClipPrice = paperBox.LengthClipSize.Width * paperBox.LengthClipSize.Length * (paperBox.LengthClipCount / boxCount) * ClipPrice / 10000;
+            //纸板价格
+            paperBox.PaperPrice = paperBox.PaperSize.Width * paperBox.PaperSize.Length * PaperPrice / 10000;
+            //每箱子总价
+            paperBox.PaperBoxPrice = paperBox.GasketPrice + paperBox.ShortClipPrice + paperBox.LengthClipPrice + paperBox.PaperPrice;
 
             return paperBox;
         }

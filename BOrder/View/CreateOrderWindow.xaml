@@ -22,6 +22,7 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <WrapPanel Grid.Row="1" Margin="0,6">
             <TextBlock Text="产品编号"/>
@@ -83,6 +84,28 @@
             <TextBox HorizontalAlignment="Stretch" Style="{StaticResource InputStyle}"
                      x:Name="Product_Remarks_TB" Grid.Column="1" TextAlignment="Left"/>
         </Grid>
+        <WrapPanel Grid.Row="5" Margin="0,6">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="纸板价格"/>
+                <TextBox Style="{StaticResource InputStyle}"  PreviewTextInput="TextBox_PreviewTextInput"
+                          x:Name="Paper_Price_TB"/>
+                <TextBlock Text="/㎡"/> 
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="12,0,0,0">
+                <TextBlock Text="垫片价格"/>
+                <TextBox Style="{StaticResource InputStyle}"  PreviewTextInput="TextBox_PreviewTextInput"
+                          x:Name="Gasket_Price_TB"/>
+                <TextBlock Text="/㎡"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="12,0,0,0">
+                <TextBlock Text="卡子价格"/>
+                <TextBox Style="{StaticResource InputStyle}"  PreviewTextInput="TextBox_PreviewTextInput"
+                          x:Name="Clip_Price_TB"/>
+                <TextBlock Text="/㎡"/>
+            </StackPanel>
+        </WrapPanel>
         <Button VerticalAlignment="Bottom" HorizontalAlignment="Right" Content="生成订单" Click="Button_Click"/>
     </Grid>
 </Window>
