@@ -13,29 +13,31 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace BOrder
-{
+namespace BOrder {
     /// <summary>
     /// Interaction logic for CreateOrderWindow.xaml
     /// </summary>
-    public partial class CreateOrderWindow : Window
-    {
-        public CreateOrderWindow()
-        {
+    public partial class CreateOrderWindow : Window {
+        public CreateOrderWindow() {
             InitializeComponent();
         }
 
-        private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
+        private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e) {
             Regex re = new Regex("[^0-9.-]+");
             e.Handled = re.IsMatch(e.Text);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            if (ValidationEmpty(Order_ID_TB, "请填写订单号") && ValidationEmpty(Product_Length_TB, "请正确填写产品尺寸") && ValidationEmpty(Product_Height_TB, "请正确填写产品尺寸") && ValidationEmpty(Product_Width_TB, "请正确填写产品尺寸") && ValidationEmpty(Floor_Width_Count_TB, "请正确填写每层装法") && ValidationEmpty(Floor_Length_Count_TB, "请正确填写每层装法") && ValidationEmpty(Floor_TB, "请正确填写层数") && ValidationEmpty(Product_Total_TB, "请正确填写产品总数")
-                && ValidationEmpty(Paper_Price_TB, "请正确填写纸板价格") && ValidationEmpty(Gasket_Price_TB, "请正确填写垫片价格") && ValidationEmpty(Clip_Price_TB, "请正确填写卡子价格"))
-            {
+        private void Button_Click(object sender, RoutedEventArgs e) {
+            //if (ValidationEmpty(Order_ID_TB, "请填写订单号") && ValidationEmpty(Product_Length_TB, "请正确填写产品尺寸") && ValidationEmpty(Product_Height_TB, "请正确填写产品尺寸") && ValidationEmpty(Product_Width_TB, "请正确填写产品尺寸") && ValidationEmpty(Floor_Width_Count_TB, "请正确填写每层装法") && ValidationEmpty(Floor_Length_Count_TB, "请正确填写每层装法") && ValidationEmpty(Floor_TB, "请正确填写层数") && ValidationEmpty(Product_Total_TB, "请正确填写产品总数")
+            //    && ValidationEmpty(Paper_Price_TB, "请正确填写纸板价格") && ValidationEmpty(Gasket_Price_TB, "请正确填写垫片价格") && ValidationEmpty(Clip_Price_TB, "请正确填写卡子价格"))
+            //{
+            if (ValidationEmpty(Order_ID_TB, "请填写订单号") && ValidationEmpty(Product_Length_TB, "请正确填写产品尺寸") && ValidationEmpty(Product_Height_TB, "请正确填写产品尺寸") && ValidationEmpty(Product_Width_TB, "请正确填写产品尺寸") && ValidationEmpty(Floor_Width_Count_TB, "请正确填写每层装法") && ValidationEmpty(Floor_Length_Count_TB, "请正确填写每层装法") && ValidationEmpty(Floor_TB, "请正确填写层数") && ValidationEmpty(Product_Total_TB, "请正确填写产品总数")) {
+                bool isShowPrice = (bool)IS_Show_Calc_Price_CB.IsChecked;
+                if (isShowPrice) {
+                    if (!ValidationEmpty(Paper_Price_TB, "请正确填写纸板价格") || !ValidationEmpty(Gasket_Price_TB, "请正确填写垫片价格") || !ValidationEmpty(Clip_Price_TB, "请正确填写卡子价格")) {
+                        return;
+                    }
+                }
                 double height = 0;
                 double length = 0;
                 double width = 0;
@@ -65,13 +67,11 @@ namespace BOrder
                 double.TryParse(Clip_Price_TB.Text, out clipPrice);
                 double.TryParse(Gasket_Price_TB.Text, out gasketPrice);
 
-                if (floorCount == 0)
-                {
+                if (floorCount == 0) {
                     MessageBox.Show("请正确填写层数");
                     return;
                 }
-                var bottle = new Bottle()
-                {
+                var bottle = new Bottle() {
                     PaperPrice = paperPrice,
                     GasketPrice = gasketPrice,
                     ClipPrice = clipPrice,
@@ -79,26 +79,24 @@ namespace BOrder
                     ProductSize = new ObjectSize() { Height = height, Length = length, Width = width },
                     FloorSizeCount = new FloorSizeCount() { LengthCount = lengthCount, WidthCount = widthCount }
                 };
-                var extra = new ProductExtra()
-                {
+                var extra = new ProductExtra() {
                     IsPrintWord = (bool)IS_Print_CB.IsChecked,
                     OrderID = Order_ID_TB.Text,
                     Remarks = Product_Remarks_TB.Text
                 };
                 IPaperBoxConfig config = null;
-                if (!(bool)IS_Black_Clip_CB.IsChecked)
-                {
+                if (!(bool)IS_Black_Clip_CB.IsChecked) {
                     config = new PaperBoxOfWhiteClipConfig();
                     config.ExtraHeight = extraHeight;
                 }
-                else
-                {
+                else {
                     config = new PaperBoxOfBlackClipConfig();
                     config.ExtraHeight = extraHeight;
                 }
                 var order = OrderManager.Instance().CreatePaperBoxOrder(config, bottle, extra, total);
                 var window = new OrderDetailWindow();
                 window.PaperBoxOrder = order;
+                window.IsCalcPrice = isShowPrice;
                 window.Show();
             }
             //string paperBoxInfo = $"箱子数量:{order.PaperBoxCount},箱子尺寸:长{order.PaperBox.BoxSize.Length}宽{order.PaperBox.BoxSize.Width}高{order.PaperBox.BoxSize.Height},纸板尺寸:长{order.PaperBox.Size.Length}宽{order.PaperBox.Size.Width},垫片的数量:{order.PaperBox.GasketCount},垫片的尺寸:长{order.PaperBox.GasketSize.Length}宽{order.PaperBox.GasketSize.Width},卡子数量:{order.PaperBox.ClipCount},长卡子数量:{order.PaperBox.LengthClipCount},长卡子尺寸:长{order.PaperBox.LengthClipSize.Length}宽{order.PaperBox.LengthClipSize.Width},短卡子数量:{order.PaperBox.ShortClipCount},短卡子尺寸:长{order.PaperBox.ShortClipSize.Length}宽{order.PaperBox.ShortClipSize.Width}"; 
@@ -106,14 +104,12 @@ namespace BOrder
             //Box_Output_TB.Text = paperBoxInfo;
         }
 
-        private bool ValidationEmpty(TextBox textBox, string message)
-        {
-            if (string.IsNullOrEmpty(textBox.Text))
-            {
+        private bool ValidationEmpty(TextBox textBox, string message) {
+            if (string.IsNullOrEmpty(textBox.Text)) {
                 MessageBox.Show(message);
                 return false;
             }
             return true;
-        }
+        } 
     }
 }

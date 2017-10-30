@@ -5,18 +5,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BOrder.ViewModel
-{
-    public class OrderDetailViewModel : ViewModelBase
-    {
+namespace BOrder.ViewModel {
+    public class OrderDetailViewModel : ViewModelBase {
         private PaperBoxOrder _paperBoxOrder;
-        public PaperBoxOrder PaperBoxOrder
-        {
+        public PaperBoxOrder PaperBoxOrder {
             get { return _paperBoxOrder; }
-            set
-            {
+            set {
                 _paperBoxOrder = value;
                 RaisePropertyChanged(nameof(PaperBoxOrder));
+            }
+        }
+
+        private bool _isCalcPrice;
+        public bool IsCalcPrice {
+            get { return _isCalcPrice; }
+            set {
+                _isCalcPrice = value;
+                RaisePropertyChanged(nameof(IsCalcPrice));
             }
         }
 

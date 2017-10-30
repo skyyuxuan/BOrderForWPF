@@ -8,9 +8,10 @@
         mc:Ignorable="d"
         Loaded="OnLoaded"
         Title="订单详情" Height="600" Width="800">
-    
+
     <Window.Resources>
         <converts:DoubleConverter x:Key="DoubleConverter"/>
+        <converts:BoolConverterToVisibility x:Key="BoolConverterToVisibility"/>
         <converts:BoolConverter x:Key="BoolConverter"/>
         <Style TargetType="TextBlock" x:Key="TitleTextBlockStyle">
             <Setter Property="FontSize" Value="18"/>
@@ -24,7 +25,7 @@
         </Style>
 
         <Style TargetType="TextBox" x:Key="ContentTextBoxStyle">
-            <Setter Property="FontSize" Value="16"/> 
+            <Setter Property="FontSize" Value="16"/>
             <Setter Property="BorderThickness" Value="0,0,0,1"/>
             <Setter Property="Margin" Value="6,0"/>
             <Setter Property="Padding" Value="6,2"/>
@@ -38,7 +39,7 @@
         </Style>
 
     </Window.Resources>
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -215,7 +216,7 @@
                     </Border>
                 </StackPanel>
 
-                <WrapPanel Grid.Row="3"> 
+                <WrapPanel Grid.Row="3" Visibility="{Binding IsCalcPrice,Converter={StaticResource BoolConverterToVisibility}}">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="纸板价格" Style="{StaticResource TitleTextBlockStyle}"/>
                         <TextBox Style="{StaticResource ContentTextBoxStyle}" 

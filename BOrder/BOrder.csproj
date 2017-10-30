@@ -70,6 +70,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\BoolConverterToVisibility.cs" />
     <Compile Include="Converters\BoolConverter.cs" />
     <Compile Include="Converters\DoubleConverter.cs" />
     <Compile Include="Model\IPaperBoxConfig.cs" />

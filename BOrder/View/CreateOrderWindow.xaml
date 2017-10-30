@@ -5,9 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BOrder"
         mc:Ignorable="d"
+        xmlns:converts="clr-namespace:BOrder.Converters"
         Title="创建订单" Height="300" Width="500">
 
     <Window.Resources>
+        <converts:BoolConverterToVisibility x:Key="BoolConverterToVisibility"/>
         <Style x:Key="InputStyle" TargetType="TextBox">
             <Setter Property="MinWidth" Value="60"/>
             <Setter Property="TextAlignment" Value="Center"/>
@@ -29,7 +31,8 @@
             <TextBox Style="{StaticResource InputStyle}"
                          x:Name="Order_ID_TB" Width="100"/>
             <CheckBox Content="是否印字" x:Name="IS_Print_CB" IsChecked="False"/>
-            <CheckBox Content="是否为黑卡子" Margin="12,0,0,0" x:Name="IS_Black_Clip_CB" IsChecked="False"/> 
+            <CheckBox Content="是否为黑卡子" Margin="12,0,0,0" x:Name="IS_Black_Clip_CB" IsChecked="False"/>
+            <CheckBox Content="是否计算价格" Margin="12,0,0,0" x:Name="IS_Show_Calc_Price_CB" IsChecked="False" />
         </WrapPanel>
         <WrapPanel Grid.Row="2" Margin="0,6" >
             <TextBlock Grid.ColumnSpan="3" Text="产品尺寸" />
@@ -84,7 +87,7 @@
             <TextBox HorizontalAlignment="Stretch" Style="{StaticResource InputStyle}"
                      x:Name="Product_Remarks_TB" Grid.Column="1" TextAlignment="Left"/>
         </Grid>
-        <WrapPanel Grid.Row="5" Margin="0,6">
+        <WrapPanel x:Name="Price_Container" Grid.Row="5" Margin="0,6" Visibility="{Binding ElementName=IS_Show_Calc_Price_CB,Path=IsChecked,Converter={StaticResource BoolConverterToVisibility}}">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="纸板价格"/>
                 <TextBox Style="{StaticResource InputStyle}"  PreviewTextInput="TextBox_PreviewTextInput"
