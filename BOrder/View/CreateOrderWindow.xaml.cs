@@ -1,4 +1,5 @@
-﻿using BOrder.Model;
+﻿using BOrder.Config;
+using BOrder.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -85,12 +86,18 @@ namespace BOrder {
                     Remarks = Product_Remarks_TB.Text
                 };
                 IPaperBoxConfig config = null;
-                if (!(bool)IS_Black_Clip_CB.IsChecked) {
-                    config = new PaperBoxOfWhiteClipConfig();
-                    config.ExtraHeight = extraHeight;
+                if (BoxType_CB.SelectedIndex == 0) {
+                    if (!(bool)IS_Black_Clip_CB.IsChecked) {
+                        config = new PaperBoxOfWhiteClipConfig();
+                        config.ExtraHeight = extraHeight;
+                    }
+                    else {
+                        config = new PaperBoxOfBlackClipConfig();
+                        config.ExtraHeight = extraHeight;
+                    }
                 }
                 else {
-                    config = new PaperBoxOfBlackClipConfig();
+                    config = new PaperBoxBEConfig();
                     config.ExtraHeight = extraHeight;
                 }
                 var order = OrderManager.Instance().CreatePaperBoxOrder(config, bottle, extra, total);
@@ -110,6 +117,6 @@ namespace BOrder {
                 return false;
             }
             return true;
-        } 
+        }
     }
 }

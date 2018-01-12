@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BOrder.Model
-{
-    public class PaperBoxOfBlackClipConfig : IPaperBoxConfig
+namespace BOrder.Config {
+    public class PaperBoxBEConfig : IPaperBoxConfig
     {
 
         public float ExtraHeight
@@ -38,11 +37,11 @@ namespace BOrder.Model
             get; set;
         }
 
-        public PaperBoxOfBlackClipConfig()
+        public PaperBoxBEConfig()
         {
-            Spacing = 0.3F;
-            Inside = 1;
-            InsideHeight = 1.2F;
+            Spacing = 0.2F;
+            Inside = 0.8F;
+            InsideHeight = 1F;
             ExtraHeight = 0F;
             PaperWidthDefaut = 0.5F;
             PaperLengthDefaut = 3F;

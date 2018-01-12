@@ -1,75 +1,61 @@
-﻿using System;
+﻿using BOrder.Config;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BOrder.Model
-{
-    public class Bottle : ModelBase, IProduct
-    {
+namespace BOrder.Model {
+    public class Bottle : ModelBase, IProduct {
         private int _floorCount;
 
-        public int FloorCount
-        {
+        public int FloorCount {
             get { return _floorCount; }
-            set
-            {
+            set {
                 SetProperty(ref _floorCount, value, nameof(FloorCount));
             }
         }
         private FloorSizeCount _floorSizeCount;
-        public FloorSizeCount FloorSizeCount
-        {
+        public FloorSizeCount FloorSizeCount {
             get { return _floorSizeCount; }
-            set
-            {
+            set {
                 SetProperty(ref _floorSizeCount, value, nameof(FloorSizeCount));
             }
         }
 
         private ObjectSize _productSize;
-        public ObjectSize ProductSize
-        {
+        public ObjectSize ProductSize {
             get { return _productSize; }
-            set
-            {
+            set {
                 SetProperty(ref _productSize, value, nameof(ProductSize));
             }
         }
 
         private double _paperPrice;
-        public double PaperPrice
-        {
+        public double PaperPrice {
             get { return _paperPrice; }
-            set
-            {
+            set {
                 SetProperty(ref _paperPrice, value, nameof(PaperPrice));
             }
         }
 
         private double _gasketPrice;
-        public double GasketPrice
-        {
+        public double GasketPrice {
             get { return _gasketPrice; }
-            set
-            {
+            set {
                 SetProperty(ref _gasketPrice, value, nameof(GasketPrice));
             }
         }
 
         private double _clipPrice;
-        public double ClipPrice
-        {
+        public double ClipPrice {
             get { return _clipPrice; }
-            set
-            {
+            set {
                 SetProperty(ref _clipPrice, value, nameof(ClipPrice));
             }
         }
 
 
-        public PaperBox CreatePaperBox(IPaperBoxConfig config, int boxCount)
-        {
+        public PaperBox CreatePaperBox(IPaperBoxConfig config, int boxCount) {
             var result = new PaperBox();
             //箱子容量
             result.ProductCount = this.FloorSizeCount.WidthCount * this.FloorSizeCount.LengthCount * FloorCount;
@@ -120,13 +106,11 @@ namespace BOrder.Model
             //return result;
         }
 
-        public int GetPaperBoxCount(int total)
-        {
+        public int GetPaperBoxCount(int total) {
             return (int)Math.Ceiling(((decimal)total / (this.FloorSizeCount.WidthCount * this.FloorSizeCount.LengthCount * FloorCount)));
         }
 
-        public PaperBox UpdatePaperBox(PaperBox paperBox, IPaperBoxConfig config, int boxCount)
-        {
+        public PaperBox UpdatePaperBox(PaperBox paperBox, IPaperBoxConfig config, int boxCount) {
             if (paperBox == null || paperBox.BoxSize == null)
                 return paperBox;
 
@@ -158,13 +142,11 @@ namespace BOrder.Model
             shortClipSize.Width = ProductSize.Height;
             shortClipSize.Length = paperBox.GasketSize.Width;
             paperBox.ShortClipSize = shortClipSize;
-            if (length >= width)
-            {
+            if (length >= width) {
                 paperBox.LengthClipCount = paperBox.ClipCount * (FloorSizeCount.WidthCount - 1);
                 paperBox.ShortClipCount = paperBox.ClipCount * (FloorSizeCount.LengthCount - 1);
             }
-            else
-            {
+            else {
                 paperBox.LengthClipCount = paperBox.ClipCount * (FloorSizeCount.LengthCount - 1);
                 paperBox.ShortClipCount = paperBox.ClipCount * (FloorSizeCount.WidthCount - 1);
             }

@@ -70,12 +70,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Config\PaperBoxBEConfig.cs" />
     <Compile Include="Converters\BoolConverterToVisibility.cs" />
     <Compile Include="Converters\BoolConverter.cs" />
     <Compile Include="Converters\DoubleConverter.cs" />
-    <Compile Include="Model\IPaperBoxConfig.cs" />
+    <Compile Include="Config\IPaperBoxConfig.cs" />
     <Compile Include="Model\ModelBase.cs" />
-    <Compile Include="Model\PaperBoxOfWhiteClipConfig.cs" />
+    <Compile Include="Config\PaperBoxOfWhiteClipConfig.cs" />
     <Compile Include="Model\ProductExtra.cs" />
     <Compile Include="ViewModel\CreateOrderViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -102,7 +103,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Bottle.cs" />
-    <Compile Include="Model\PaperBoxOfBlackClipConfig.cs" />
+    <Compile Include="Config\PaperBoxOfBlackClipConfig.cs" />
     <Compile Include="Model\FloorSizeCount.cs" />
     <Compile Include="Model\IProduct.cs" />
     <Compile Include="Model\ObjectSize.cs" />

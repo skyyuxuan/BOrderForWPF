@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BOrder.Model
-{
+namespace BOrder.Config {
     public interface IPaperBoxConfig
     {
         /// <summary>
