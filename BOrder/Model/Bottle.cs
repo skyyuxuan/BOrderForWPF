@@ -127,8 +127,8 @@ namespace BOrder.Model {
             paperBox.GasketCount = FloorCount * boxCount;
             //垫片尺寸
             var gasketSize = new ObjectSize();
-            gasketSize.Width = paperBox.BoxSize.Width - 1;
-            gasketSize.Length = paperBox.BoxSize.Length - 1;
+            gasketSize.Width = paperBox.BoxSize.Width - config.Inside;
+            gasketSize.Length = paperBox.BoxSize.Length - config.Inside;
             paperBox.GasketSize = gasketSize;
 
             //长卡子尺寸
