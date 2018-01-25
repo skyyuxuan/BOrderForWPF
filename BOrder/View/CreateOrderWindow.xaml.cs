@@ -86,20 +86,25 @@ namespace BOrder {
                     Remarks = Product_Remarks_TB.Text
                 };
                 IPaperBoxConfig config = null;
-                if (BoxType_CB.SelectedIndex == 0) {
-                    if (!(bool)IS_Black_Clip_CB.IsChecked) {
-                        config = new PaperBoxOfWhiteClipConfig();
-                        config.ExtraHeight = extraHeight;
-                    }
-                    else {
-                        config = new PaperBoxOfBlackClipConfig();
-                        config.ExtraHeight = extraHeight;
-                    }
-                }
-                else {
-                    config = new PaperBoxBEConfig();
-                    config.ExtraHeight = extraHeight;
-                }
+                //if (BoxType_CB.SelectedIndex == 0) {
+                //    if (!(bool)IS_Black_Clip_CB.IsChecked) {
+                //        config = new PaperBoxOfWhiteClipConfig();
+                //        config.ExtraHeight = extraHeight;
+                //    }
+                //    else {
+                //        config = new PaperBoxOfBlackClipConfig();
+                //        config.ExtraHeight = extraHeight;
+                //    }
+                //}
+                //else {
+                //    config = new PaperBoxBEConfig();
+                //    config.ExtraHeight = extraHeight;
+                //}
+
+
+                //config = new PaperBoxThreeOfWhiteClipConfig();
+                config = new PaperBoxThreeBEConfig();
+                config.ExtraHeight = extraHeight;
                 var order = OrderManager.Instance().CreatePaperBoxOrder(config, bottle, extra, total);
                 var window = new OrderDetailWindow();
                 window.PaperBoxOrder = order;

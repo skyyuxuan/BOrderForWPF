@@ -70,7 +70,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Config\PaperBoxThreeBEConfig.cs" />
     <Compile Include="Config\PaperBoxBEConfig.cs" />
+    <Compile Include="Config\PaperBoxThreeOfWhiteClipConfig.cs" />
     <Compile Include="Converters\BoolConverterToVisibility.cs" />
     <Compile Include="Converters\BoolConverter.cs" />
     <Compile Include="Converters\DoubleConverter.cs" />
