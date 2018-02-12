@@ -19,7 +19,7 @@ namespace BOrder {
     /// Interaction logic for CreateOrderWindow.xaml
     /// </summary>
     public partial class CreateOrderWindow : Window {
-        private const string CATEGORY = "箱子：BE五层 卡子：白卡";
+        private const string CATEGORY = "箱子：BE五层 卡子：E卡";
         public CreateOrderWindow() {
             InitializeComponent();
             this.Loaded += OnLoaded;
@@ -27,6 +27,7 @@ namespace BOrder {
 
         private void OnLoaded(object sender, RoutedEventArgs e) {
             this.Product_Category_TB.Text = CATEGORY;
+            BoxType_CB.SelectedIndex = 1;
         }
 
         private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e) {
