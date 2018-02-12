@@ -19,8 +19,14 @@ namespace BOrder {
     /// Interaction logic for CreateOrderWindow.xaml
     /// </summary>
     public partial class CreateOrderWindow : Window {
+        private const string CATEGORY = "箱子：BE五层 卡子：白卡";
         public CreateOrderWindow() {
             InitializeComponent();
+            this.Loaded += OnLoaded;
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs e) {
+            this.Product_Category_TB.Text = CATEGORY;
         }
 
         private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e) {
@@ -83,7 +89,8 @@ namespace BOrder {
                 var extra = new ProductExtra() {
                     IsPrintWord = (bool)IS_Print_CB.IsChecked,
                     OrderID = Order_ID_TB.Text,
-                    Remarks = Product_Remarks_TB.Text
+                    Remarks = Product_Remarks_TB.Text,
+                    Category = CATEGORY,
                 };
                 IPaperBoxConfig config = null;
                 if (BoxType_CB.SelectedIndex == 0) {

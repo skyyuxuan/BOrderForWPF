@@ -59,6 +59,7 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 <WrapPanel>
                     <StackPanel Orientation="Horizontal">
@@ -215,8 +216,8 @@
                         <TextBlock Style="{StaticResource ContentTextBlockStyle}" Text="{Binding PaperBoxOrder.Remarks,FallbackValue=错误}"/>
                     </Border>
                 </StackPanel>
-
-                <WrapPanel Grid.Row="3" Visibility="{Binding IsCalcPrice,Converter={StaticResource BoolConverterToVisibility}}">
+                <TextBlock Grid.Row="3"  Style="{StaticResource TitleTextBlockStyle}" Text="{Binding PaperBoxOrder.Category}" />
+                <WrapPanel Grid.Row="4" Visibility="{Binding IsCalcPrice,Converter={StaticResource BoolConverterToVisibility}}">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="纸板价格" Style="{StaticResource TitleTextBlockStyle}"/>
                         <TextBox Style="{StaticResource ContentTextBoxStyle}" 

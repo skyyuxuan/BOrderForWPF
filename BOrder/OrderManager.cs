@@ -61,6 +61,7 @@ namespace BOrder
             order.ID = extra.OrderID;
             order.IsPrintWord = extra.IsPrintWord;
             order.Remarks = extra.Remarks;
+            order.Category = extra.Category;
             return order;
         }
     }
