@@ -25,13 +25,14 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <WrapPanel Grid.Row="1" Margin="0,6">
             <TextBlock Text="产品编号" VerticalAlignment="Center"/>
             <TextBox Style="{StaticResource InputStyle}"
                          x:Name="Order_ID_TB" Width="100"/>
             <TextBlock Text="纸箱类型" VerticalAlignment="Center"/>
-            <ComboBox Width="70" Margin="6,0,0,0" SelectedIndex="0" x:Name="BoxType_CB" Visibility="Collapsed">
+            <ComboBox Width="70" Margin="6,0,0,0" SelectedIndex="0" x:Name="BoxType_CB">
                 <ComboBoxItem Content="普通"/>
                 <ComboBoxItem Content="BE三层"/>
             </ComboBox>
@@ -92,7 +93,11 @@
             <TextBox HorizontalAlignment="Stretch" Style="{StaticResource InputStyle}"
                      x:Name="Product_Remarks_TB" Grid.Column="1" TextAlignment="Left"/>
         </Grid>
-        <WrapPanel x:Name="Price_Container" Grid.Row="5" Margin="0,6" Visibility="{Binding ElementName=IS_Show_Calc_Price_CB,Path=IsChecked,Converter={StaticResource BoolConverterToVisibility}}">
+        <Grid Grid.Row="5" Margin="0,6">
+            <TextBlock x:Name="Product_Category_TB" Text=""/>
+           
+        </Grid>
+        <WrapPanel x:Name="Price_Container" Grid.Row="6" Margin="0,6" Visibility="{Binding ElementName=IS_Show_Calc_Price_CB,Path=IsChecked,Converter={StaticResource BoolConverterToVisibility}}">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="纸板价格"/>
                 <TextBox Style="{StaticResource InputStyle}"  PreviewTextInput="TextBox_PreviewTextInput"

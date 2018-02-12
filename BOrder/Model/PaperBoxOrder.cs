@@ -26,7 +26,12 @@ namespace BOrder.Model {
             set { SetProperty(ref _remarks, value, nameof(Remarks)); }
 
         }
+        private string _category;
+        public string Category {
+            get { return _category; }
+            set { SetProperty(ref _category, value, nameof(Category)); }
 
+        } 
 
         private PaperBox _paperBox;
 
@@ -52,7 +57,7 @@ namespace BOrder.Model {
         public int ProductTotalCount {
             get { return _productTotalCount; }
             set { SetProperty(ref _productTotalCount, value, nameof(ProductTotalCount)); }
-        } 
-      
+        }
+
     }
 }
