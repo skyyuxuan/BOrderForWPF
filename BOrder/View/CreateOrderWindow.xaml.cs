@@ -105,7 +105,7 @@ namespace BOrder
                     IsPrintWord = (bool)IS_Print_CB.IsChecked,
                     OrderID = Order_ID_TB.Text,
                     Remarks = Product_Remarks_TB.Text,
-                    Category = CATEGORY,
+                    Category = Product_Category_TB.Text,
                 };
                 IPaperBoxConfig config = null;
                 if (BoxType_CB.SelectedIndex == 0)
