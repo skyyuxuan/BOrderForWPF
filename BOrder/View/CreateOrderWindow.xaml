@@ -31,13 +31,15 @@
             <TextBlock Text="产品编号" VerticalAlignment="Center"/>
             <TextBox Style="{StaticResource InputStyle}"
                          x:Name="Order_ID_TB" Width="100"/>
-            <TextBlock Text="纸箱类型" VerticalAlignment="Center"/>
-            <ComboBox Width="70" Margin="6,0,0,0" SelectedIndex="0" x:Name="BoxType_CB">
-                <ComboBoxItem Content="普通"/>
-                <ComboBoxItem Content="BE三层"/>
+            <TextBlock Text="纸箱类型" VerticalAlignment="Center" Visibility="Collapsed"/>
+            <ComboBox Width="80" Margin="6,0,0,0" SelectedIndex="0" x:Name="BoxType_CB" IsEnabled="False">
+                <ComboBoxItem Content="五层白卡"/>
+                <ComboBoxItem Content="五层E卡"/>
+                <ComboBoxItem Content="三层E卡"/>
+                <ComboBoxItem Content="三层白卡"/>
             </ComboBox>
             <CheckBox Content="是否印字" x:Name="IS_Print_CB" IsChecked="False" VerticalAlignment="Center" Margin="12,0,12,0"/>
-            <CheckBox Content="是否为黑卡子" Margin="0,3,12,0" x:Name="IS_Black_Clip_CB" IsChecked="False" VerticalAlignment="Center" Visibility="Collapsed"/>
+            <CheckBox Content="是否为黑卡子" Margin="0,3,12,0" x:Name="IS_Black_Clip_CB" IsChecked="False" VerticalAlignment="Center"/>
             <CheckBox Content="是否计算价格" Margin="0,3,0,0" x:Name="IS_Show_Calc_Price_CB" IsChecked="False" VerticalAlignment="Center"/>
         </WrapPanel>
         <WrapPanel Grid.Row="2" Margin="0,6" >

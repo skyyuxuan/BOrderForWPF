@@ -14,35 +14,59 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace BOrder {
+namespace BOrder
+{
     /// <summary>
     /// Interaction logic for CreateOrderWindow.xaml
     /// </summary>
-    public partial class CreateOrderWindow : Window {
-        private const string CATEGORY = "箱子：三层 卡子：白卡";
-        public CreateOrderWindow() {
+    public partial class CreateOrderWindow : Window
+    {
+        private Dictionary<long, string> CategoryDic = new Dictionary<long, string>() { [0] = "箱子：BE五层 卡子：白卡", [1] = "箱子：BE五层 卡子：E卡", [2] = "箱子：三层 卡子：E卡", [3] = "箱子：三层 卡子：白卡" };
+        public CreateOrderWindow()
+        {
             InitializeComponent();
             this.Loaded += OnLoaded;
         }
 
-        private void OnLoaded(object sender, RoutedEventArgs e) {
-            this.Product_Category_TB.Text = CATEGORY;
-            BoxType_CB.SelectedIndex = 1;
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            var index = 0; 
+#if Debug_Five_W
+            index = 0;
+#elif Debug_Five_E
+            index = 1;
+#elif Debug_Three_E
+            index = 2;
+#else
+            index = 3;
+#endif
+            this.BoxType_CB.SelectedIndex = index;
+            this.Product_Category_TB.Text = CategoryDic[index];
+            if (index < 2)
+            {
+                IS_Black_Clip_CB.Visibility = Visibility.Collapsed;
+            }
+
         }
 
-        private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e) {
+        private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
             Regex re = new Regex("[^0-9.-]+");
             e.Handled = re.IsMatch(e.Text);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e) {
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
             //if (ValidationEmpty(Order_ID_TB, "请填写订单号") && ValidationEmpty(Product_Length_TB, "请正确填写产品尺寸") && ValidationEmpty(Product_Height_TB, "请正确填写产品尺寸") && ValidationEmpty(Product_Width_TB, "请正确填写产品尺寸") && ValidationEmpty(Floor_Width_Count_TB, "请正确填写每层装法") && ValidationEmpty(Floor_Length_Count_TB, "请正确填写每层装法") && ValidationEmpty(Floor_TB, "请正确填写层数") && ValidationEmpty(Product_Total_TB, "请正确填写产品总数")
             //    && ValidationEmpty(Paper_Price_TB, "请正确填写纸板价格") && ValidationEmpty(Gasket_Price_TB, "请正确填写垫片价格") && ValidationEmpty(Clip_Price_TB, "请正确填写卡子价格"))
             //{
-            if (ValidationEmpty(Order_ID_TB, "请填写订单号") && ValidationEmpty(Product_Length_TB, "请正确填写产品尺寸") && ValidationEmpty(Product_Height_TB, "请正确填写产品尺寸") && ValidationEmpty(Product_Width_TB, "请正确填写产品尺寸") && ValidationEmpty(Floor_Width_Count_TB, "请正确填写每层装法") && ValidationEmpty(Floor_Length_Count_TB, "请正确填写每层装法") && ValidationEmpty(Floor_TB, "请正确填写层数") && ValidationEmpty(Product_Total_TB, "请正确填写产品总数")) {
+            if (ValidationEmpty(Order_ID_TB, "请填写订单号") && ValidationEmpty(Product_Length_TB, "请正确填写产品尺寸") && ValidationEmpty(Product_Height_TB, "请正确填写产品尺寸") && ValidationEmpty(Product_Width_TB, "请正确填写产品尺寸") && ValidationEmpty(Floor_Width_Count_TB, "请正确填写每层装法") && ValidationEmpty(Floor_Length_Count_TB, "请正确填写每层装法") && ValidationEmpty(Floor_TB, "请正确填写层数") && ValidationEmpty(Product_Total_TB, "请正确填写产品总数"))
+            {
                 bool isShowPrice = (bool)IS_Show_Calc_Price_CB.IsChecked;
-                if (isShowPrice) {
-                    if (!ValidationEmpty(Paper_Price_TB, "请正确填写纸板价格") || !ValidationEmpty(Gasket_Price_TB, "请正确填写垫片价格") || !ValidationEmpty(Clip_Price_TB, "请正确填写卡子价格")) {
+                if (isShowPrice)
+                {
+                    if (!ValidationEmpty(Paper_Price_TB, "请正确填写纸板价格") || !ValidationEmpty(Gasket_Price_TB, "请正确填写垫片价格") || !ValidationEmpty(Clip_Price_TB, "请正确填写卡子价格"))
+                    {
                         return;
                     }
                 }
@@ -75,11 +99,13 @@ namespace BOrder {
                 double.TryParse(Clip_Price_TB.Text, out clipPrice);
                 double.TryParse(Gasket_Price_TB.Text, out gasketPrice);
 
-                if (floorCount == 0) {
+                if (floorCount == 0)
+                {
                     MessageBox.Show("请正确填写层数");
                     return;
                 }
-                var bottle = new Bottle() {
+                var bottle = new Bottle()
+                {
                     PaperPrice = paperPrice,
                     GasketPrice = gasketPrice,
                     ClipPrice = clipPrice,
@@ -87,32 +113,44 @@ namespace BOrder {
                     ProductSize = new ObjectSize() { Height = height, Length = length, Width = width },
                     FloorSizeCount = new FloorSizeCount() { LengthCount = lengthCount, WidthCount = widthCount }
                 };
-                var extra = new ProductExtra() {
+
+                var extra = new ProductExtra()
+                {
                     IsPrintWord = (bool)IS_Print_CB.IsChecked,
                     OrderID = Order_ID_TB.Text,
                     Remarks = Product_Remarks_TB.Text,
-                    Category = CATEGORY,
+                    Category = Product_Category_TB.Text
                 };
+
                 IPaperBoxConfig config = null;
-                //if (BoxType_CB.SelectedIndex == 0) {
-                //    if (!(bool)IS_Black_Clip_CB.IsChecked) {
-                //        config = new PaperBoxOfWhiteClipConfig();
-                //        config.ExtraHeight = extraHeight;
-                //    }
-                //    else {
-                //        config = new PaperBoxOfBlackClipConfig();
-                //        config.ExtraHeight = extraHeight;
-                //    }
-                //}
-                //else {
-                //    config = new PaperBoxBEConfig();
-                //    config.ExtraHeight = extraHeight;
-                //}
-
-
-                config = new PaperBoxThreeOfWhiteClipConfig();
-                //config = new PaperBoxThreeBEConfig();
-                config.ExtraHeight = extraHeight;
+                if (BoxType_CB.SelectedIndex == 0)
+                {
+                    if (!(bool)IS_Black_Clip_CB.IsChecked)
+                    {
+                        config = new PaperBoxOfWhiteClipConfig();
+                        config.ExtraHeight = extraHeight;
+                    }
+                    else
+                    {
+                        config = new PaperBoxOfBlackClipConfig();
+                        config.ExtraHeight = extraHeight;
+                    }
+                }
+                else if (BoxType_CB.SelectedIndex == 1)
+                {
+                    config = new PaperBoxBEConfig();
+                    config.ExtraHeight = extraHeight;
+                }
+                else if (BoxType_CB.SelectedIndex == 2)
+                {
+                    config = new PaperBoxThreeBEConfig();
+                    config.ExtraHeight = extraHeight;
+                }
+                else
+                {
+                    config = new PaperBoxThreeOfWhiteClipConfig();
+                    config.ExtraHeight = extraHeight;
+                }
                 var order = OrderManager.Instance().CreatePaperBoxOrder(config, bottle, extra, total);
                 var window = new OrderDetailWindow();
                 window.PaperBoxOrder = order;
@@ -124,8 +162,10 @@ namespace BOrder {
             //Box_Output_TB.Text = paperBoxInfo;
         }
 
-        private bool ValidationEmpty(TextBox textBox, string message) {
-            if (string.IsNullOrEmpty(textBox.Text)) {
+        private bool ValidationEmpty(TextBox textBox, string message)
+        {
+            if (string.IsNullOrEmpty(textBox.Text))
+            {
                 MessageBox.Show(message);
                 return false;
             }
