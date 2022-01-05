@@ -30,7 +30,7 @@ namespace BOrder
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            var index = 0; 
+            var index = 0;
 #if Debug_Five_W
             index = 0;
 #elif Debug_Five_E
@@ -42,7 +42,7 @@ namespace BOrder
 #endif
             this.BoxType_CB.SelectedIndex = index;
             this.Product_Category_TB.Text = CategoryDic[index];
-            if (index < 2)
+            if (index >= 2)
             {
                 IS_Black_Clip_CB.Visibility = Visibility.Collapsed;
             }
