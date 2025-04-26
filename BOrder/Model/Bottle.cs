@@ -151,8 +151,8 @@ namespace BOrder.Model {
                 paperBox.ShortClipCount = paperBox.ClipCount * (FloorSizeCount.WidthCount - 1);
             }
             var size = new ObjectSize();
-            size.Width = paperBox.BoxSize.Width + paperBox.BoxSize.Height + 0.5;
-            size.Length = (paperBox.BoxSize.Length + paperBox.BoxSize.Width) * 2 + 3;
+            size.Width = paperBox.BoxSize.Width + paperBox.BoxSize.Height + config.PaperWidthDefaut;
+            size.Length = (paperBox.BoxSize.Length + paperBox.BoxSize.Width) * 2 + config.PaperLengthDefaut;
             paperBox.PaperSize = size;
 
             //计算价格

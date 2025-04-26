@@ -7,13 +7,22 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BOrder", "BOrder\BOrder.csp
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug_E|Any CPU = Debug_E|Any CPU
+		Debug_Five_E|Any CPU = Debug_Five_E|Any CPU
+		Debug_Five_W|Any CPU = Debug_Five_W|Any CPU
+		Debug_Three_E|Any CPU = Debug_Three_E|Any CPU
+		Debug_Three_W|Any CPU = Debug_Three_W|Any CPU
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C4C4DDD6-2E69-45BA-8C0C-943A1F6BE5D8}.Debug_E|Any CPU.ActiveCfg = Debug_E|Any CPU
-		{C4C4DDD6-2E69-45BA-8C0C-943A1F6BE5D8}.Debug_E|Any CPU.Build.0 = Debug_E|Any CPU
+		{C4C4DDD6-2E69-45BA-8C0C-943A1F6BE5D8}.Debug_Five_E|Any CPU.ActiveCfg = Debug_Five_E|Any CPU
+		{C4C4DDD6-2E69-45BA-8C0C-943A1F6BE5D8}.Debug_Five_E|Any CPU.Build.0 = Debug_Five_E|Any CPU
+		{C4C4DDD6-2E69-45BA-8C0C-943A1F6BE5D8}.Debug_Five_W|Any CPU.ActiveCfg = Debug_Five_W|Any CPU
+		{C4C4DDD6-2E69-45BA-8C0C-943A1F6BE5D8}.Debug_Five_W|Any CPU.Build.0 = Debug_Five_W|Any CPU
+		{C4C4DDD6-2E69-45BA-8C0C-943A1F6BE5D8}.Debug_Three_E|Any CPU.ActiveCfg = Debug_Three_E|Any CPU
+		{C4C4DDD6-2E69-45BA-8C0C-943A1F6BE5D8}.Debug_Three_E|Any CPU.Build.0 = Debug_Three_E|Any CPU
+		{C4C4DDD6-2E69-45BA-8C0C-943A1F6BE5D8}.Debug_Three_W|Any CPU.ActiveCfg = Debug_Three_W|Any CPU
+		{C4C4DDD6-2E69-45BA-8C0C-943A1F6BE5D8}.Debug_Three_W|Any CPU.Build.0 = Debug_Three_W|Any CPU
 		{C4C4DDD6-2E69-45BA-8C0C-943A1F6BE5D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C4C4DDD6-2E69-45BA-8C0C-943A1F6BE5D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4C4DDD6-2E69-45BA-8C0C-943A1F6BE5D8}.Release|Any CPU.ActiveCfg = Release|Any CPU

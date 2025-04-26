@@ -21,7 +21,7 @@ namespace BOrder
     /// </summary>
     public partial class CreateOrderWindow : Window
     {
-        private const string CATEGORY_E = "箱子：BE五层 卡子：E卡";
+        private Dictionary<long, string> CategoryDic = new Dictionary<long, string>() { [0] = "箱子：BE五层 卡子：白卡", [1] = "箱子：BE五层 卡子：E卡", [2] = "箱子：三层 卡子：E卡", [3] = "箱子：三层 卡子：白卡" };
         public CreateOrderWindow()
         {
             InitializeComponent();
@@ -30,10 +30,23 @@ namespace BOrder
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
-#if Debug_E
-            this.Product_Category_TB.Text = CATEGORY_E;
-            this.BoxType_CB.SelectedIndex = 1;
+            var index = 0;
+#if Debug_Five_W
+            index = 0;
+#elif Debug_Five_E
+            index = 1;
+#elif Debug_Three_E
+            index = 2;
+#else
+            index = 3;
 #endif
+            this.BoxType_CB.SelectedIndex = index;
+            this.Product_Category_TB.Text = CategoryDic[index];
+            if (index >= 2)
+            {
+                IS_Black_Clip_CB.Visibility = Visibility.Collapsed;
+            }
+
         }
 
         private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -100,13 +113,15 @@ namespace BOrder
                     ProductSize = new ObjectSize() { Height = height, Length = length, Width = width },
                     FloorSizeCount = new FloorSizeCount() { LengthCount = lengthCount, WidthCount = widthCount }
                 };
+
                 var extra = new ProductExtra()
                 {
                     IsPrintWord = (bool)IS_Print_CB.IsChecked,
                     OrderID = Order_ID_TB.Text,
                     Remarks = Product_Remarks_TB.Text,
-                    Category = Product_Category_TB.Text,
+                    Category = Product_Category_TB.Text
                 };
+
                 IPaperBoxConfig config = null;
                 if (BoxType_CB.SelectedIndex == 0)
                 {
@@ -121,9 +136,19 @@ namespace BOrder
                         config.ExtraHeight = extraHeight;
                     }
                 }
-                else
+                else if (BoxType_CB.SelectedIndex == 1)
                 {
                     config = new PaperBoxBEConfig();
+                    config.ExtraHeight = extraHeight;
+                }
+                else if (BoxType_CB.SelectedIndex == 2)
+                {
+                    config = new PaperBoxThreeBEConfig();
+                    config.ExtraHeight = extraHeight;
+                }
+                else
+                {
+                    config = new PaperBoxThreeOfWhiteClipConfig();
                     config.ExtraHeight = extraHeight;
                 }
                 var order = OrderManager.Instance().CreatePaperBoxOrder(config, bottle, extra, total);
