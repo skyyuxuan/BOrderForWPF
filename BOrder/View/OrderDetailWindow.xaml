@@ -63,7 +63,8 @@
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
-
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
                     <WrapPanel>
                         <StackPanel Orientation="Horizontal">
@@ -292,7 +293,7 @@
               Text="{Binding PaperBoxOrder.PaperBox.PaperBoxPrice,Converter={StaticResource DoubleConverter},FallbackValue=错误}"/>
                             <TextBlock Text="元" Style="{StaticResource ContentTextBlockStyle}"/>
                         </StackPanel>
-                    </WrapPanel> 
+                    </WrapPanel>
                     <WrapPanel Grid.Row="6">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="排列类型" Style="{StaticResource TitleTextBlockStyle}"/>
@@ -301,6 +302,14 @@
                             </Border>
                         </StackPanel> 
                         <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="垫片排列" Style="{StaticResource TitleTextBlockStyle}"/>
+                            <Border Style="{StaticResource ContentBorderStyle}">
+                                <TextBlock Style="{StaticResource ContentTextBlockStyle}">
+<Run Text="{Binding PaperBoxOrder.PaperArrange.GasketArrange.Row,Converter={StaticResource DoubleConverter},FallbackValue=错误}"/>
+<Run Text="X"/>
+<Run Text="{Binding PaperBoxOrder.PaperArrange.GasketArrange.Column,Converter={StaticResource DoubleConverter},FallbackValue=错误}"/>
+                                </TextBlock>
+                            </Border>
                             <TextBlock Text="垫片尺寸" Style="{StaticResource TitleTextBlockStyle}"/>
                             <Border Style="{StaticResource ContentBorderStyle}">
                                 <TextBlock Style="{StaticResource ContentTextBlockStyle}">
@@ -317,6 +326,14 @@
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="长卡子排列" Style="{StaticResource TitleTextBlockStyle}"/>
+                            <Border Style="{StaticResource ContentBorderStyle}">
+                                <TextBlock Style="{StaticResource ContentTextBlockStyle}">
+<Run Text="{Binding PaperBoxOrder.PaperArrange.LengthClipArrange.Row,Converter={StaticResource DoubleConverter},FallbackValue=错误}"/>
+<Run Text="X"/>
+<Run Text="{Binding PaperBoxOrder.PaperArrange.LengthClipArrange.Column,Converter={StaticResource DoubleConverter},FallbackValue=错误}"/>
+                                </TextBlock>
+                            </Border>
                             <TextBlock Text="长卡子尺寸" Style="{StaticResource TitleTextBlockStyle}"/>
                             <Border Style="{StaticResource ContentBorderStyle}">
                                 <TextBlock Style="{StaticResource ContentTextBlockStyle}">
@@ -333,6 +350,14 @@
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="短卡子排列" Style="{StaticResource TitleTextBlockStyle}"/>
+                            <Border Style="{StaticResource ContentBorderStyle}">
+                                <TextBlock Style="{StaticResource ContentTextBlockStyle}">
+<Run Text="{Binding PaperBoxOrder.PaperArrange.ShortClipArrange.Row,Converter={StaticResource DoubleConverter},FallbackValue=错误}"/>
+<Run Text="X"/>
+<Run Text="{Binding PaperBoxOrder.PaperArrange.ShortClipArrange.Column,Converter={StaticResource DoubleConverter},FallbackValue=错误}"/>
+                                </TextBlock>
+                            </Border>
                             <TextBlock Text="短卡子尺寸" Style="{StaticResource TitleTextBlockStyle}"/>
                             <Border Style="{StaticResource ContentBorderStyle}">
                                 <TextBlock Style="{StaticResource ContentTextBlockStyle}">

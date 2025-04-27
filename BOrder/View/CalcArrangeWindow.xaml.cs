@@ -72,6 +72,9 @@ namespace BOrder
                     Column = double.Parse(ShortClip_Column_TB.Text)
                 };
                 PaperArrange paperArrange = arrange.CreatePaperArrange(PaperBoxOrder.PaperBox, gasketArrange, lengthClipArrange, shortClipArrange);
+                paperArrange.GasketArrange = gasketArrange;
+                paperArrange.LengthClipArrange = lengthClipArrange;
+                paperArrange.ShortClipArrange = shortClipArrange; 
                 paperArrange.Category = category;
                 PaperBoxOrder.PaperArrange = paperArrange;
                 window.PaperBoxOrder = PaperBoxOrder;

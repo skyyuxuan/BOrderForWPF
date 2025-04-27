@@ -26,6 +26,14 @@ namespace BOrder.Model
             set { SetProperty(ref _gasketSize, value, nameof(GasketSize)); }
         }
 
+        private ObjectArrange _gasketArrange;
+
+        public ObjectArrange GasketArrange
+        {
+            get { return _gasketArrange; }
+            set { SetProperty(ref _gasketArrange, value, nameof(GasketArrange)); }
+        }
+
         private double _gasketCount;
 
         public double GasketCount
@@ -49,6 +57,14 @@ namespace BOrder.Model
             set { SetProperty(ref _lengthClipSize, value, nameof(LengthClipSize)); }
         }
 
+        private ObjectArrange _lengthClipArrange;
+
+        public ObjectArrange LengthClipArrange
+        {
+            get { return _lengthClipArrange; }
+            set { SetProperty(ref _lengthClipArrange, value, nameof(LengthClipArrange)); }
+        }
+
         private double _lengthClipCount;
 
         public double LengthClipCount
@@ -69,6 +85,14 @@ namespace BOrder.Model
         {
             get { return _shortClipSize; }
             set { SetProperty(ref _shortClipSize, value, nameof(ShortClipSize)); }
+        }
+
+        private ObjectArrange _shortClipArrange;
+
+        public ObjectArrange ShortClipArrange
+        {
+            get { return _shortClipArrange; }
+            set { SetProperty(ref _shortClipArrange, value, nameof(ShortClipArrange)); }
         }
 
         private double _shortClipCount;
