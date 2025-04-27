@@ -6,7 +6,7 @@ using System.Text;
 namespace BOrder.Model
 {
     /// <summary>
-    /// 
+    /// 纸箱
     /// </summary>
     public class PaperBox : ModelBase
     {
@@ -165,7 +165,7 @@ namespace BOrder.Model
         /// <summary>
         /// 每套箱子价格
         /// </summary>
-        public double PaperBoxPrice  
+        public double PaperBoxPrice
         {
             get { return _paperBoxPrice; }
             set

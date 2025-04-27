@@ -121,6 +121,6 @@
                 <TextBlock Text="/㎡"/>
             </StackPanel>
         </WrapPanel>
-        <Button VerticalAlignment="Bottom" HorizontalAlignment="Right" Content="生成订单" Click="Button_Click"/>
+        <Button VerticalAlignment="Bottom" HorizontalAlignment="Right" Content="计算排列" Click="Button_Click"/>
     </Grid>
 </Window>

@@ -152,13 +152,18 @@ namespace BOrder
                     config.ExtraHeight = extraHeight;
                 }
                 var order = OrderManager.Instance().CreatePaperBoxOrder(config, bottle, extra, total);
-                var window = new OrderDetailWindow();
+
+                var window = new CalcArrangeWindow();
                 window.PaperBoxOrder = order;
                 window.IsCalcPrice = isShowPrice;
                 window.Show();
+
+                //var window = new OrderDetailWindow();
+                //window.PaperBoxOrder = order;
+                //window.IsCalcPrice = isShowPrice;
+                //window.Show();
             }
             //string paperBoxInfo = $"箱子数量:{order.PaperBoxCount},箱子尺寸:长{order.PaperBox.BoxSize.Length}宽{order.PaperBox.BoxSize.Width}高{order.PaperBox.BoxSize.Height},纸板尺寸:长{order.PaperBox.Size.Length}宽{order.PaperBox.Size.Width},垫片的数量:{order.PaperBox.GasketCount},垫片的尺寸:长{order.PaperBox.GasketSize.Length}宽{order.PaperBox.GasketSize.Width},卡子数量:{order.PaperBox.ClipCount},长卡子数量:{order.PaperBox.LengthClipCount},长卡子尺寸:长{order.PaperBox.LengthClipSize.Length}宽{order.PaperBox.LengthClipSize.Width},短卡子数量:{order.PaperBox.ShortClipCount},短卡子尺寸:长{order.PaperBox.ShortClipSize.Length}宽{order.PaperBox.ShortClipSize.Width}"; 
-
             //Box_Output_TB.Text = paperBoxInfo;
         }
 
