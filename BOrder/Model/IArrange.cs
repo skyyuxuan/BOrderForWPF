@@ -13,6 +13,8 @@ namespace BOrder.Model
 
     public class LargeArrange : ArrangeBase, IArrange
     {
+        private const double LengthExtra = 1d;
+        private const double WidthExtra = 1.2d;
         public PaperArrange CreatePaperArrange(PaperBox paperBox, ObjectArrange gasketArrange, ObjectArrange lengthClipArrange, ObjectArrange shortClipArrange)
         {
             var arrange = new PaperArrange();
@@ -23,13 +25,13 @@ namespace BOrder.Model
 
             var lengthClip = Calc(lengthClipArrange, new ObjectSize()
             {
-                Length = paperBox.LengthClipSize.Length + paperBox.ShortClipSize.Length + 1.2d,
+                Length = paperBox.LengthClipSize.Length + paperBox.ShortClipSize.Length + LengthExtra,
                 Width = paperBox.LengthClipSize.Width,
             }, paperBox.LengthClipCount);
             arrange.LengthClipSize = new ObjectSize()
             {
                 Length = lengthClip.Size.Length,
-                Width = lengthClip.Size.Width + 1.2d
+                Width = lengthClip.Size.Width + WidthExtra
             };
             arrange.LengthClipCount = lengthClip.Count;
             arrange.LengthClipArea = CalcArea(arrange.LengthClipSize, arrange.LengthClipCount);
@@ -37,13 +39,13 @@ namespace BOrder.Model
 
             var shortClip = Calc(shortClipArrange, new ObjectSize()
             {
-                Length = paperBox.ShortClipSize.Length + 1.2d,
+                Length = paperBox.ShortClipSize.Length,
                 Width = paperBox.ShortClipSize.Width,
             }, paperBox.ShortClipCount - paperBox.LengthClipCount);
             arrange.ShortClipSize = new ObjectSize()
             {
-                Length = shortClip.Size.Length,
-                Width = shortClip.Size.Width + 1.2d
+                Length = shortClip.Size.Length + LengthExtra,
+                Width = shortClip.Size.Width + WidthExtra
             };
             arrange.ShortClipCount = shortClip.Count;
             arrange.ShortClipArea = CalcArea(arrange.ShortClipSize, arrange.ShortClipCount);
@@ -74,29 +76,39 @@ namespace BOrder.Model
     }
     public class SmallArrange : ArrangeBase, IArrange
     {
+        private const double LengthExtra = 1d;
+        private const double WidthExtra = 1.2d;
         public PaperArrange CreatePaperArrange(PaperBox paperBox, ObjectArrange gasketArrange, ObjectArrange lengthClipArrange, ObjectArrange shortClipArrange)
         {
             var arrange = new PaperArrange();
             var gasket = Calc(gasketArrange, paperBox.GasketSize, paperBox.GasketCount);
             arrange.GasketSize = gasket.Size;
-            arrange.GasketCount = gasket.Count; 
+            arrange.GasketCount = gasket.Count;
             arrange.GasketArea = CalcArea(arrange.GasketSize, arrange.GasketCount);
 
             var lengthClip = Calc(lengthClipArrange, new ObjectSize()
             {
-                Length = paperBox.LengthClipSize.Length + 1.2d,
+                Length = paperBox.LengthClipSize.Length + LengthExtra,
                 Width = paperBox.LengthClipSize.Width,
             }, paperBox.LengthClipCount);
-            arrange.LengthClipSize = new ObjectSize() { Length = lengthClip.Size.Length, Width = lengthClip.Size.Width + 1.2d };
-            arrange.LengthClipCount = lengthClip.Count; 
+            arrange.LengthClipSize = new ObjectSize()
+            {
+                Length = lengthClip.Size.Length,
+                Width = lengthClip.Size.Width + WidthExtra
+            };
+            arrange.LengthClipCount = lengthClip.Count;
             arrange.LengthClipArea = CalcArea(arrange.LengthClipSize, arrange.LengthClipCount);
 
             var shortClip = Calc(shortClipArrange, new ObjectSize()
             {
-                Length = paperBox.ShortClipSize.Length + 1.2d,
+                Length = paperBox.ShortClipSize.Length + LengthExtra,
                 Width = paperBox.ShortClipSize.Width,
             }, paperBox.ShortClipCount);
-            arrange.ShortClipSize = new ObjectSize() { Length = shortClip.Size.Length, Width = shortClip.Size.Width + 1.2d };
+            arrange.ShortClipSize = new ObjectSize()
+            {
+                Length = shortClip.Size.Length,
+                Width = shortClip.Size.Width + WidthExtra
+            };
             arrange.ShortClipCount = shortClip.Count;
             arrange.ShortClipArea = CalcArea(arrange.ShortClipSize, arrange.ShortClipCount);
 
