@@ -260,47 +260,11 @@
                     </WrapPanel>
                     <WrapPanel Grid.Row="5">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="纸板价格" Style="{StaticResource TitleTextBlockStyle}"/>
-                            <TextBox Style="{StaticResource ContentTextBoxStyle}" 
-              Text="{Binding PaperBoxOrder.PaperBox.PaperPrice,Converter={StaticResource DoubleConverter},FallbackValue=错误}"/>
-                            <TextBlock Text="元" Style="{StaticResource ContentTextBlockStyle}"/>
-                        </StackPanel>
-
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="短卡子价格" Style="{StaticResource TitleTextBlockStyle}"/>
-                            <TextBox Style="{StaticResource ContentTextBoxStyle}" 
-              Text="{Binding PaperBoxOrder.PaperBox.ShortClipPrice,Converter={StaticResource DoubleConverter},FallbackValue=错误}"/>
-                            <TextBlock Text="元" Style="{StaticResource ContentTextBlockStyle}"/>
-                        </StackPanel>
-
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="长卡子价格" Style="{StaticResource TitleTextBlockStyle}"/>
-                            <TextBox Style="{StaticResource ContentTextBoxStyle}" 
-              Text="{Binding PaperBoxOrder.PaperBox.LengthClipPrice,Converter={StaticResource DoubleConverter},FallbackValue=错误}"/>
-                            <TextBlock Text="元" Style="{StaticResource ContentTextBlockStyle}"/>
-                        </StackPanel>
-
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="垫片价格" Style="{StaticResource TitleTextBlockStyle}"/>
-                            <TextBox Style="{StaticResource ContentTextBoxStyle}" 
-              Text="{Binding PaperBoxOrder.PaperBox.GasketPrice,Converter={StaticResource DoubleConverter},FallbackValue=错误}"/>
-                            <TextBlock Text="元" Style="{StaticResource ContentTextBlockStyle}"/>
-                        </StackPanel>
-
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="每箱总价格" Style="{StaticResource TitleTextBlockStyle}"/>
-                            <TextBox Style="{StaticResource ContentTextBoxStyle}" 
-              Text="{Binding PaperBoxOrder.PaperBox.PaperBoxPrice,Converter={StaticResource DoubleConverter},FallbackValue=错误}"/>
-                            <TextBlock Text="元" Style="{StaticResource ContentTextBlockStyle}"/>
-                        </StackPanel>
-                    </WrapPanel>
-                    <WrapPanel Grid.Row="6">
-                        <StackPanel Orientation="Horizontal">
                             <TextBlock Text="排列类型" Style="{StaticResource TitleTextBlockStyle}"/>
                             <Border Style="{StaticResource ContentBorderStyle}">
                                 <TextBlock Style="{StaticResource ContentTextBlockStyle}" Text="{Binding PaperBoxOrder.PaperArrange.Category,FallbackValue=错误}"/>
                             </Border>
-                        </StackPanel> 
+                        </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="垫片排列" Style="{StaticResource TitleTextBlockStyle}"/>
                             <Border Style="{StaticResource ContentBorderStyle}">
@@ -323,6 +287,10 @@
                                 <TextBlock Style="{StaticResource ContentTextBlockStyle}" Text="{Binding PaperBoxOrder.PaperArrange.GasketCount,FallbackValue=错误}"/>
                             </Border>
                             <TextBlock Text="片" Style="{StaticResource TitleTextBlockStyle}"/>
+                            <Border Style="{StaticResource ContentBorderStyle}">
+                                <TextBlock Style="{StaticResource ContentTextBlockStyle}" Text="{Binding PaperBoxOrder.PaperArrange.GasketArea,FallbackValue=错误}"/>
+                            </Border>
+                            <TextBlock Text="平方" Style="{StaticResource TitleTextBlockStyle}"/>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
@@ -347,6 +315,10 @@
                                 <TextBlock Style="{StaticResource ContentTextBlockStyle}" Text="{Binding PaperBoxOrder.PaperArrange.LengthClipCount,FallbackValue=错误}"/>
                             </Border>
                             <TextBlock Text="片" Style="{StaticResource TitleTextBlockStyle}"/>
+                            <Border Style="{StaticResource ContentBorderStyle}">
+                                <TextBlock Style="{StaticResource ContentTextBlockStyle}" Text="{Binding PaperBoxOrder.PaperArrange.LengthClipArea,FallbackValue=错误}"/>
+                            </Border>
+                            <TextBlock Text="平方" Style="{StaticResource TitleTextBlockStyle}"/>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
@@ -371,6 +343,10 @@
                                 <TextBlock Style="{StaticResource ContentTextBlockStyle}" Text="{Binding PaperBoxOrder.PaperArrange.ShortClipCount,FallbackValue=错误}"/>
                             </Border>
                             <TextBlock Text="片" Style="{StaticResource TitleTextBlockStyle}"/>
+                            <Border Style="{StaticResource ContentBorderStyle}">
+                                <TextBlock Style="{StaticResource ContentTextBlockStyle}" Text="{Binding PaperBoxOrder.PaperArrange.ShortClipArea,FallbackValue=错误}"/>
+                            </Border>
+                            <TextBlock Text="平方" Style="{StaticResource TitleTextBlockStyle}"/>
                         </StackPanel>
                     </WrapPanel>
                 </Grid>

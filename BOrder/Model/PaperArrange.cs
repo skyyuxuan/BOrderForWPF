@@ -48,6 +48,19 @@ namespace BOrder.Model
             }
         }
 
+        private double _gasketArea;
+
+        public double GasketArea
+        {
+            get
+            {
+                return _gasketArea;
+            }
+            set
+            {
+                SetProperty(ref _gasketArea, value, nameof(GasketArea));
+            }
+        }
 
         private ObjectSize _lengthClipSize;
 
@@ -79,6 +92,20 @@ namespace BOrder.Model
             }
         }
 
+        private double _lengthClipArea;
+
+        public double LengthClipArea
+        {
+            get
+            {
+                return _lengthClipArea;
+            }
+            set
+            {
+                SetProperty(ref _lengthClipArea, value, nameof(LengthClipArea));
+            }
+        }
+
         private ObjectSize _shortClipSize;
 
         public ObjectSize ShortClipSize
@@ -106,6 +133,20 @@ namespace BOrder.Model
             set
             {
                 SetProperty(ref _shortClipCount, value, nameof(ShortClipCount));
+            }
+        }
+
+        private double _shortClipArea;
+
+        public double ShortClipArea
+        {
+            get
+            {
+                return _shortClipArea;
+            }
+            set
+            {
+                SetProperty(ref _shortClipArea, value, nameof(ShortClipArea));
             }
         }
     }
