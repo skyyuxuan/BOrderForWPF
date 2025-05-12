@@ -59,7 +59,7 @@ namespace BOrder.Model
                 {
                     Length = paperBox.LengthClipSize.Length,
                     Width = paperBox.LengthClipSize.Width,
-                }, paperBox.LengthClipCount - paperBox.LengthClipCount);
+                }, paperBox.LengthClipCount - paperBox.ShortClipCount);
                 arrange.LengthClipSize = new ObjectSize()
                 {
                     Length = lengthClip.Size.Length + LengthExtra,
@@ -70,7 +70,7 @@ namespace BOrder.Model
 
                 var shortClip = Calc(shortClipArrange, new ObjectSize()
                 {
-                    Length = paperBox.ShortClipSize.Length + paperBox.ShortClipSize.Length + LengthExtra,
+                    Length = paperBox.LengthClipSize.Length + paperBox.ShortClipSize.Length + LengthExtra,
                     Width = paperBox.ShortClipSize.Width,
                 }, paperBox.ShortClipCount);
                 arrange.ShortClipSize = new ObjectSize()
@@ -79,8 +79,7 @@ namespace BOrder.Model
                     Width = shortClip.Size.Width + WidthExtra
                 };
                 arrange.ShortClipCount = shortClip.Count;
-                arrange.ShortClipArea = CalcArea(arrange.ShortClipSize, arrange.ShortClipCount);
-
+                arrange.ShortClipArea = CalcArea(arrange.ShortClipSize, arrange.ShortClipCount); 
 
              
             }
