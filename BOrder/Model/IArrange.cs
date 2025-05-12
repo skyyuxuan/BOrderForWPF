@@ -24,7 +24,7 @@ namespace BOrder.Model
             arrange.GasketArea = CalcArea(arrange.GasketSize, arrange.GasketCount);
 
             if (paperBox.LengthClipCount <= paperBox.ShortClipCount)
-            { 
+            {
                 var lengthClip = Calc(lengthClipArrange, new ObjectSize()
                 {
                     Length = paperBox.LengthClipSize.Length + paperBox.ShortClipSize.Length + LengthExtra,
@@ -54,34 +54,61 @@ namespace BOrder.Model
             }
             else
             {
-
+                //当长卡的数量大于短卡子的时候算法变更
                 var lengthClip = Calc(lengthClipArrange, new ObjectSize()
                 {
-                    Length = paperBox.LengthClipSize.Length,
+                    Length = paperBox.LengthClipSize.Length + paperBox.ShortClipSize.Length + LengthExtra,
                     Width = paperBox.LengthClipSize.Width,
-                }, paperBox.LengthClipCount - paperBox.ShortClipCount);
+                }, paperBox.ShortClipCount);
                 arrange.LengthClipSize = new ObjectSize()
                 {
-                    Length = lengthClip.Size.Length + LengthExtra,
+                    Length = lengthClip.Size.Length,
                     Width = lengthClip.Size.Width + WidthExtra
                 };
                 arrange.LengthClipCount = lengthClip.Count;
                 arrange.LengthClipArea = CalcArea(arrange.LengthClipSize, arrange.LengthClipCount);
 
+
                 var shortClip = Calc(shortClipArrange, new ObjectSize()
                 {
-                    Length = paperBox.LengthClipSize.Length + paperBox.ShortClipSize.Length + LengthExtra,
-                    Width = paperBox.ShortClipSize.Width,
-                }, paperBox.ShortClipCount);
+                    Length = paperBox.LengthClipSize.Length + LengthExtra,
+                    Width = paperBox.LengthClipSize.Width,
+                }, paperBox.LengthClipCount - paperBox.ShortClipCount);
                 arrange.ShortClipSize = new ObjectSize()
                 {
                     Length = shortClip.Size.Length,
                     Width = shortClip.Size.Width + WidthExtra
                 };
                 arrange.ShortClipCount = shortClip.Count;
-                arrange.ShortClipArea = CalcArea(arrange.ShortClipSize, arrange.ShortClipCount); 
+                arrange.ShortClipArea = CalcArea(arrange.ShortClipSize, arrange.ShortClipCount);
 
-             
+                //var lengthClip = Calc(lengthClipArrange, new ObjectSize()
+                //{
+                //    Length = paperBox.LengthClipSize.Length,
+                //    Width = paperBox.LengthClipSize.Width,
+                //}, paperBox.LengthClipCount - paperBox.ShortClipCount);
+                //arrange.LengthClipSize = new ObjectSize()
+                //{
+                //    Length = lengthClip.Size.Length + LengthExtra,
+                //    Width = lengthClip.Size.Width + WidthExtra
+                //};
+                //arrange.LengthClipCount = lengthClip.Count;
+                //arrange.LengthClipArea = CalcArea(arrange.LengthClipSize, arrange.LengthClipCount);
+
+                //var shortClip = Calc(shortClipArrange, new ObjectSize()
+                //{
+                //    Length = paperBox.LengthClipSize.Length + paperBox.ShortClipSize.Length + LengthExtra,
+                //    Width = paperBox.ShortClipSize.Width,
+                //}, paperBox.ShortClipCount);
+                //arrange.ShortClipSize = new ObjectSize()
+                //{
+                //    Length = shortClip.Size.Length,
+                //    Width = shortClip.Size.Width + WidthExtra
+                //};
+                //arrange.ShortClipCount = shortClip.Count;
+                //arrange.ShortClipArea = CalcArea(arrange.ShortClipSize, arrange.ShortClipCount); 
+
+
             }
             return arrange;
 
