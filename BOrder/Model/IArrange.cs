@@ -23,32 +23,67 @@ namespace BOrder.Model
             arrange.GasketCount = gasket.Count;
             arrange.GasketArea = CalcArea(arrange.GasketSize, arrange.GasketCount);
 
-            var lengthClip = Calc(lengthClipArrange, new ObjectSize()
-            {
-                Length = paperBox.LengthClipSize.Length + paperBox.ShortClipSize.Length + LengthExtra,
-                Width = paperBox.LengthClipSize.Width,
-            }, paperBox.LengthClipCount);
-            arrange.LengthClipSize = new ObjectSize()
-            {
-                Length = lengthClip.Size.Length,
-                Width = lengthClip.Size.Width + WidthExtra
-            };
-            arrange.LengthClipCount = lengthClip.Count;
-            arrange.LengthClipArea = CalcArea(arrange.LengthClipSize, arrange.LengthClipCount);
+            if (paperBox.LengthClipCount <= paperBox.ShortClipCount)
+            { 
+                var lengthClip = Calc(lengthClipArrange, new ObjectSize()
+                {
+                    Length = paperBox.LengthClipSize.Length + paperBox.ShortClipSize.Length + LengthExtra,
+                    Width = paperBox.LengthClipSize.Width,
+                }, paperBox.LengthClipCount);
+                arrange.LengthClipSize = new ObjectSize()
+                {
+                    Length = lengthClip.Size.Length,
+                    Width = lengthClip.Size.Width + WidthExtra
+                };
+                arrange.LengthClipCount = lengthClip.Count;
+                arrange.LengthClipArea = CalcArea(arrange.LengthClipSize, arrange.LengthClipCount);
 
 
-            var shortClip = Calc(shortClipArrange, new ObjectSize()
+                var shortClip = Calc(shortClipArrange, new ObjectSize()
+                {
+                    Length = paperBox.ShortClipSize.Length,
+                    Width = paperBox.ShortClipSize.Width,
+                }, paperBox.ShortClipCount - paperBox.LengthClipCount);
+                arrange.ShortClipSize = new ObjectSize()
+                {
+                    Length = shortClip.Size.Length + LengthExtra,
+                    Width = shortClip.Size.Width + WidthExtra
+                };
+                arrange.ShortClipCount = shortClip.Count;
+                arrange.ShortClipArea = CalcArea(arrange.ShortClipSize, arrange.ShortClipCount);
+            }
+            else
             {
-                Length = paperBox.ShortClipSize.Length,
-                Width = paperBox.ShortClipSize.Width,
-            }, paperBox.ShortClipCount - paperBox.LengthClipCount);
-            arrange.ShortClipSize = new ObjectSize()
-            {
-                Length = shortClip.Size.Length + LengthExtra,
-                Width = shortClip.Size.Width + WidthExtra
-            };
-            arrange.ShortClipCount = shortClip.Count;
-            arrange.ShortClipArea = CalcArea(arrange.ShortClipSize, arrange.ShortClipCount);
+
+                var lengthClip = Calc(lengthClipArrange, new ObjectSize()
+                {
+                    Length = paperBox.LengthClipSize.Length,
+                    Width = paperBox.LengthClipSize.Width,
+                }, paperBox.LengthClipCount - paperBox.LengthClipCount);
+                arrange.LengthClipSize = new ObjectSize()
+                {
+                    Length = lengthClip.Size.Length + LengthExtra,
+                    Width = lengthClip.Size.Width + WidthExtra
+                };
+                arrange.LengthClipCount = lengthClip.Count;
+                arrange.LengthClipArea = CalcArea(arrange.LengthClipSize, arrange.LengthClipCount);
+
+                var shortClip = Calc(shortClipArrange, new ObjectSize()
+                {
+                    Length = paperBox.ShortClipSize.Length + paperBox.ShortClipSize.Length + LengthExtra,
+                    Width = paperBox.ShortClipSize.Width,
+                }, paperBox.ShortClipCount);
+                arrange.ShortClipSize = new ObjectSize()
+                {
+                    Length = shortClip.Size.Length,
+                    Width = shortClip.Size.Width + WidthExtra
+                };
+                arrange.ShortClipCount = shortClip.Count;
+                arrange.ShortClipArea = CalcArea(arrange.ShortClipSize, arrange.ShortClipCount);
+
+
+             
+            }
             return arrange;
 
         }
