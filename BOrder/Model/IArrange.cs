@@ -41,12 +41,12 @@ namespace BOrder.Model
 
                 var shortClip = Calc(shortClipArrange, new ObjectSize()
                 {
-                    Length = paperBox.ShortClipSize.Length,
+                    Length = paperBox.ShortClipSize.Length + LengthExtra,
                     Width = paperBox.ShortClipSize.Width,
                 }, paperBox.ShortClipCount - paperBox.LengthClipCount);
                 arrange.ShortClipSize = new ObjectSize()
                 {
-                    Length = shortClip.Size.Length + LengthExtra,
+                    Length = shortClip.Size.Length,
                     Width = shortClip.Size.Width + WidthExtra
                 };
                 arrange.ShortClipCount = shortClip.Count;
