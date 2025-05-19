@@ -18,7 +18,7 @@ namespace BOrder.Model
         public PaperArrange CreatePaperArrange(PaperBox paperBox, ObjectArrange gasketArrange, ObjectArrange lengthClipArrange, ObjectArrange shortClipArrange)
         {
             var arrange = new PaperArrange();
-            var gasket = Calc(gasketArrange, paperBox.GasketSize, paperBox.GasketCount);
+            var gasket = Calc(gasketArrange, paperBox.GasketSize, paperBox.GasketCount, true);
             arrange.GasketSize = gasket.Size;
             arrange.GasketCount = gasket.Count;
             arrange.GasketArea = CalcArea(arrange.GasketSize, arrange.GasketCount);
@@ -29,7 +29,7 @@ namespace BOrder.Model
                 {
                     Length = paperBox.LengthClipSize.Length + paperBox.ShortClipSize.Length + LengthExtra,
                     Width = paperBox.LengthClipSize.Width,
-                }, paperBox.LengthClipCount);
+                }, paperBox.LengthClipCount, false);
                 arrange.LengthClipSize = new ObjectSize()
                 {
                     Length = lengthClip.Size.Length,
@@ -43,7 +43,7 @@ namespace BOrder.Model
                 {
                     Length = paperBox.ShortClipSize.Length + LengthExtra,
                     Width = paperBox.ShortClipSize.Width,
-                }, paperBox.ShortClipCount - paperBox.LengthClipCount);
+                }, paperBox.ShortClipCount - paperBox.LengthClipCount, false);
                 arrange.ShortClipSize = new ObjectSize()
                 {
                     Length = shortClip.Size.Length,
@@ -59,7 +59,7 @@ namespace BOrder.Model
                 {
                     Length = paperBox.LengthClipSize.Length + paperBox.ShortClipSize.Length + LengthExtra,
                     Width = paperBox.LengthClipSize.Width,
-                }, paperBox.ShortClipCount);
+                }, paperBox.ShortClipCount, false);
                 arrange.LengthClipSize = new ObjectSize()
                 {
                     Length = lengthClip.Size.Length,
@@ -73,7 +73,7 @@ namespace BOrder.Model
                 {
                     Length = paperBox.LengthClipSize.Length + LengthExtra,
                     Width = paperBox.LengthClipSize.Width,
-                }, paperBox.LengthClipCount - paperBox.ShortClipCount);
+                }, paperBox.LengthClipCount - paperBox.ShortClipCount, false);
                 arrange.ShortClipSize = new ObjectSize()
                 {
                     Length = shortClip.Size.Length,
@@ -117,16 +117,17 @@ namespace BOrder.Model
     }
     public class ArrangeBase
     {
-        protected (ObjectSize Size, int Count) Calc(ObjectArrange arrange, ObjectSize objectSize, int totalCount)
+        protected (ObjectSize Size, int Count) Calc(ObjectArrange arrange, ObjectSize objectSize, int totalCount, bool adjust)
         {
             double length = objectSize.Length * arrange.Row;
             double width = objectSize.Width * arrange.Column;
             int count = (int)Math.Ceiling((double)totalCount / (arrange.Row * arrange.Column));
 
+
             return (new ObjectSize()
             {
-                Length = Math.Max(length, width),
-                Width = Math.Min(length, width)
+                Length = adjust ? Math.Max(length, width) : length,
+                Width = adjust ? Math.Min(length, width) : width,
             }, count);
         }
 
@@ -142,7 +143,7 @@ namespace BOrder.Model
         public PaperArrange CreatePaperArrange(PaperBox paperBox, ObjectArrange gasketArrange, ObjectArrange lengthClipArrange, ObjectArrange shortClipArrange)
         {
             var arrange = new PaperArrange();
-            var gasket = Calc(gasketArrange, paperBox.GasketSize, paperBox.GasketCount);
+            var gasket = Calc(gasketArrange, paperBox.GasketSize, paperBox.GasketCount, true);
             arrange.GasketSize = gasket.Size;
             arrange.GasketCount = gasket.Count;
             arrange.GasketArea = CalcArea(arrange.GasketSize, arrange.GasketCount);
@@ -151,7 +152,7 @@ namespace BOrder.Model
             {
                 Length = paperBox.LengthClipSize.Length + LengthExtra,
                 Width = paperBox.LengthClipSize.Width,
-            }, paperBox.LengthClipCount);
+            }, paperBox.LengthClipCount, false);
             arrange.LengthClipSize = new ObjectSize()
             {
                 Length = lengthClip.Size.Length,
@@ -164,7 +165,7 @@ namespace BOrder.Model
             {
                 Length = paperBox.ShortClipSize.Length + LengthExtra,
                 Width = paperBox.ShortClipSize.Width,
-            }, paperBox.ShortClipCount);
+            }, paperBox.ShortClipCount, false);
             arrange.ShortClipSize = new ObjectSize()
             {
                 Length = shortClip.Size.Length,
